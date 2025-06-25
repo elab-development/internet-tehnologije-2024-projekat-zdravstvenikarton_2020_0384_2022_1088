@@ -4,7 +4,7 @@ namespace App\Enums;
 
 enum Uloge: string
 {
-    case Admin = 'admin';
-    case Doctor = 'doctor';
-    case Patient = 'patient';
+    case Lekar = 'lekar';
+    case medOsoblje = 'med_osoblje';
+    case Pscijent = 'pacijent';
 }
