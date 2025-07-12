@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('pregleds', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('dijagnoza');
+            $table->string('terapija');
+            $table->date('datum');
         });
     }
 

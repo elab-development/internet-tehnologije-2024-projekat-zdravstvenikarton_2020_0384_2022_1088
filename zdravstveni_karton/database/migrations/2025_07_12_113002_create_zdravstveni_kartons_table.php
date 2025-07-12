@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('zdravstveni_kartons', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->enum('status', ['aktivan', 'neaktivan']);
+            $table->string('poslednja_terapija');
+            $table->string('poslednja_dijagnoza');
         });
     }
 
