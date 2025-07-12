@@ -19,6 +19,12 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->enum('uloga', array_column(Uloge::cases(), 'value'));
+            $table->string('jmbg', 13);
+            $table->date('datum_rodjenja');
+            $table->string('ime');
+            $table->string('prezime');
+            $table->enum('pol', ['muski', 'zenski']);
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

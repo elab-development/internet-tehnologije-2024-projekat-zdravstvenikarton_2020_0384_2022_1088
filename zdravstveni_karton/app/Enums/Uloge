@@ -6,5 +6,5 @@ enum Uloge: string
 {
     case Lekar = 'lekar';
     case medOsoblje = 'med_osoblje';
-    case Pscijent = 'pacijent';
+    case Pacijent = 'pacijent';
 }
