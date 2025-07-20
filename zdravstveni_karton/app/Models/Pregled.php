@@ -15,5 +15,28 @@ class Pregled extends Model
         'dijagnoza',
         'terapija',
         'datum',
+
+        // spoljni ključevi
+        'lekar_id',
+        'med_osoblje_id',
+        'pacijent_id'
     ];
+
+    // Veza sa lekarom
+    public function lekar()
+    {
+        return $this->belongsTo(User::class, 'lekar_id');
+    }
+
+    // Veza sa medicinskim osobljem
+    public function medOsoblje()
+    {
+        return $this->belongsTo(User::class, 'med_osoblje_id');
+    }
+
+    // Veza sa pacijentom
+    public function pacijent()
+    {
+        return $this->belongsTo(User::class, 'pacijent_id');
+    }
 }

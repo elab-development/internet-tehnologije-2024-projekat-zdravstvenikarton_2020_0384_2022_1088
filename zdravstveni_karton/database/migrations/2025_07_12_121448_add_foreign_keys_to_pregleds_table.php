@@ -12,14 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pregleds', function (Blueprint $table) {
-            // dodavanje spoljnih kljuceva
-            $table->unsignedBigInteger('lekar_id');
-            $table->unsignedBigInteger('med_osoblje_id');
-            $table->unsignedBigInteger('pacijent_id');
 
-            $table->foreign('lekar_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('med_osoblje_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('pacijent_id')->references('id')->on('users')->onDelete('cascade');
+            // dodavanje spoljnih kljuceva
+            $table->foreignId('lekar_id')->constrained('users');
+            $table->foreignId('med_osoblje_id')->constrained('users');
+            $table->foreignId('pacijent_id')->constrained('users')->onDelete('cascade');
         });
     }
 

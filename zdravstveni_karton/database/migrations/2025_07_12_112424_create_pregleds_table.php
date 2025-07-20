@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('dijagnoza');
             $table->string('terapija');
             $table->date('datum');
+
+            // dodavanje spoljnih kljuceva
+            $table->foreignId('lekar_id')->constrained('users');
+            $table->foreignId('med_osoblje_id')->constrained('users');
+            $table->foreignId('pacijent_id')->constrained('users')->onDelete('cascade');
         });
     }
 
