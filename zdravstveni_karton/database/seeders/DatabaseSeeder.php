@@ -3,8 +3,14 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Pregled;
+use App\Models\ZdravstveniKarton;
 use Illuminate\Database\Seeder;
+
+use Database\Factories\UserFactory;
+use Database\Factories\PregledFactory;
+use Database\Factories\ZdravstveniKartonFactory;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +19,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+   
+        // kreiranje po deset korisnika svake vrste
+        User::factory()->count(10)->state(['uloga' => 'lekar'])->create();
+        User::factory()->count(10)->state(['uloga' => 'med_osoblje'])->create();
+        User::factory()->count(10)->state(['uloga' => 'pacijent'])->create();
+/*
+        // čuvanje id-ova
+        ZdravstveniKartonFactory::$lekarIds = User::where('uloga', 'lekar')->pluck('id')->toArray();
+        ZdravstveniKartonFactory::$medOsobljeIds = User::where('uloga', 'med_osoblje')->pluck('id')->toArray();
+        ZdravstveniKartonFactory::$pacijentIds = User::where('uloga', 'pacijent')->pluck('id')->toArray();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        PregledFactory::$lekarIds = User::where('uloga', 'lekar')->pluck('id')->toArray();
+        PregledFactory::$medOsobljeIds = User::where('uloga', 'med_osoblje')->pluck('id')->toArray();
+        PregledFactory::$pacijentIds = User::where('uloga', 'pacijent')->pluck('id')->toArray();
+
+        // kreiranje pregleda i zdravstvenih kartona
+        Pregled::factory()->count(20)->create();
+        ZdravstveniKarton::factory()->count(20)->create();
+        */
     }
 }

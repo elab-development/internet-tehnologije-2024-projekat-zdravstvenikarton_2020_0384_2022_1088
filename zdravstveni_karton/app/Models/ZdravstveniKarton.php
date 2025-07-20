@@ -12,8 +12,8 @@ class ZdravstveniKarton extends Model
 
     protected $fillable = [
         'status',
-        'poslednja_terapija',
         'poslednja_dijagnoza',
+        'poslednja_terapija',
 
         // spoljni ključevi
         'lekar_id',

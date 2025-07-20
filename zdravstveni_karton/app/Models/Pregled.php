@@ -15,6 +15,7 @@ class Pregled extends Model
         'dijagnoza',
         'terapija',
         'datum',
+        'status',
 
         // spoljni ključevi
         'lekar_id',

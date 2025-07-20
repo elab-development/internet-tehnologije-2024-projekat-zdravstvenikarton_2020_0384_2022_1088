@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 return new class extends Migration
 {
     /**
@@ -19,7 +20,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->enum('uloga', array_column(Uloge::cases(), 'value'));
+            
+            $table->enum('uloga', ['lekar', 'med_osoblje', 'pacijent']);
             $table->string('jmbg', 13);
             $table->date('datum_rodjenja');
             $table->string('ime');
