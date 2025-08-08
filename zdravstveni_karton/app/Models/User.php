@@ -51,4 +51,40 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // 1. Pregledi gde je korisnik pacijent
+    public function preglediPacijent()
+    {
+        return $this->hasMany(Pregled::class, 'pacijent_id');
+    }
+ 
+    // 2. Pregledi gde je korisnik lekar
+    public function preglediLekar()
+    {
+        return $this->hasMany(Pregled::class, 'lekar_id');
+    }
+ 
+    // 3. Pregledi gde je korisnik medicinsko osoblje
+    public function preglediOsoblje()
+    {
+        return $this->hasMany(Pregled::class, 'osoblje_id');
+    }
+ 
+    // 4. Zdravstveni karton korisnika kao pacijenta
+    public function kartonPacijent()
+    {
+        return $this->hasOne(ZdravstveniKarton::class, 'pacijent_id');
+    }
+ 
+    // 5. Kartoni koje je lekar kreirao (ako postoji takva veza)
+    public function kartoniLekar()
+    {
+        return $this->hasMany(ZdravstveniKarton::class, 'lekar_id');
+    }
+ 
+    // 6. Kartoni koje je osoblje obradilo (ako postoji takva veza)
+    public function kartoniOsoblje()
+    {
+        return $this->hasMany(ZdravstveniKarton::class, 'osoblje_id');
+    }
 }

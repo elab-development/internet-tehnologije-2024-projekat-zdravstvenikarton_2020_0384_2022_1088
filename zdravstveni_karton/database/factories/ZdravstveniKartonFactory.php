@@ -24,7 +24,7 @@ class ZdravstveniKartonFactory extends Factory
     {
         return [
             'status' => fake()->randomElement(['aktivan', 'neaktivan']),
-            'poslednj_dijagnoza' => fake()->randomElement(['upala pluća', 'Anemia aplastiqa', 'boginje']),
+            'poslednja_dijagnoza' => fake()->randomElement(['upala pluća', 'Anemia aplastiqa', 'boginje']),
             'poslednja_terapija' => fake()->randomElement(['parcetamol', 'fizikalna', 'panklav', 'brufen']),
 
             'lekar_id' => fake()->randomElement(self::$lekarIds),

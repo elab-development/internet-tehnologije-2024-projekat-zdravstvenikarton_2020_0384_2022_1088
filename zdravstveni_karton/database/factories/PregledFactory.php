@@ -24,7 +24,7 @@ class PregledFactory extends Factory
     {
         return [
             'dijagnoza' => fake()->randomElement(['upala pluća', 'Anemia aplastiqa', 'boginje']),
-            'terapija' => fake()->randomElement(['parcetamol', 'fizikalna', 'panklav', 'brufen']),
+            'terapija' => fake()->randomElement(['paracetamol', 'fizikalna', 'panklav', 'brufen']),
             'datum' => fake()->date(),
             'status' => fake()->randomElement(['na_cekanju', 'zavrsen']),
 

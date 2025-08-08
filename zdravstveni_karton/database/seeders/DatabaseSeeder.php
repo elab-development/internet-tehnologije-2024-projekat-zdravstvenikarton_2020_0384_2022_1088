@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->count(10)->state(['uloga' => 'lekar'])->create();
         User::factory()->count(10)->state(['uloga' => 'med_osoblje'])->create();
         User::factory()->count(10)->state(['uloga' => 'pacijent'])->create();
-/*
+
         // čuvanje id-ova
         ZdravstveniKartonFactory::$lekarIds = User::where('uloga', 'lekar')->pluck('id')->toArray();
         ZdravstveniKartonFactory::$medOsobljeIds = User::where('uloga', 'med_osoblje')->pluck('id')->toArray();
@@ -37,6 +37,6 @@ class DatabaseSeeder extends Seeder
         // kreiranje pregleda i zdravstvenih kartona
         Pregled::factory()->count(20)->create();
         ZdravstveniKarton::factory()->count(20)->create();
-        */
+        
     }
 }
