@@ -52,37 +52,37 @@ class User extends Authenticatable
         ];
     }
 
-    // 1. Pregledi gde je korisnik pacijent
+    // 1. Veza pacijenta ka pregledu
     public function preglediPacijent()
     {
         return $this->hasMany(Pregled::class, 'pacijent_id');
     }
  
-    // 2. Pregledi gde je korisnik lekar
+    // 2. Veza lekara ka pregledu
     public function preglediLekar()
     {
         return $this->hasMany(Pregled::class, 'lekar_id');
     }
  
-    // 3. Pregledi gde je korisnik medicinsko osoblje
+    // 3. Veza med. osoblja ka pregledu
     public function preglediOsoblje()
     {
         return $this->hasMany(Pregled::class, 'osoblje_id');
     }
  
-    // 4. Zdravstveni karton korisnika kao pacijenta
+    // 4. Veza pacijenta ka z. kartonu
     public function kartonPacijent()
     {
         return $this->hasOne(ZdravstveniKarton::class, 'pacijent_id');
     }
  
-    // 5. Kartoni koje je lekar kreirao (ako postoji takva veza)
+    // 4. Veza lekara ka z. kartonu
     public function kartoniLekar()
     {
         return $this->hasMany(ZdravstveniKarton::class, 'lekar_id');
     }
  
-    // 6. Kartoni koje je osoblje obradilo (ako postoji takva veza)
+    // 4. Veza med. osoblja ka z. kartonu
     public function kartoniOsoblje()
     {
         return $this->hasMany(ZdravstveniKarton::class, 'osoblje_id');
