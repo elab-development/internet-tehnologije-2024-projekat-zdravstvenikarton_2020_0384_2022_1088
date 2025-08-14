@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LekarController;
 use App\Http\Controllers\OsobljeController;
 use App\Http\Controllers\PacijentController;
+use App\Models\ZdravstveniKarton;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -23,12 +24,15 @@ Route::get('/lekar/{id}/pacijenti', [LekarController::class, 'pacijenti']);
 // Vraća sve pacijente koji su povezani sa datim med. osobljem
 Route::get('/med_osoblje/{id}/pacijenti',[OsobljeController::class,'pacijenti']);
 // Vraća sve pacijente koji imaju pregld sa statusom "čekanje u redu"
-Route::get('med_osoblje/red_cekanja',[OsobljeController::class,'red_cekanja']);    
+Route::get('/med_osoblje/red_cekanja',[OsobljeController::class,'red_cekanja']);
+// Kreiranje zdravstvenog kartona za pacijenta
+Route::post('/med_osoblje/{id}/kreiranje_kartona',[OsobljeController::class,'kreiranje_kartona']); 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // PACIJENT
 
-Route::get('pacijent/{id}/z_karton',[PacijentController::class,'z_karton']);
+Route::get('/pacijent/{id}/z_karton',[PacijentController::class,'z_karton']);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // RESURSNA RUTA ZA ZDRAVSTVENI KARTON
+Route::resource('/karton',ZdravstveniKarton::class);
