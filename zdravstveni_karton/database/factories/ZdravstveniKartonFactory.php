@@ -29,7 +29,8 @@ class ZdravstveniKartonFactory extends Factory
 
             'lekar_id' => fake()->randomElement(self::$lekarIds),
             'med_osoblje_id' => fake()->randomElement(self::$medOsobljeIds),
-            'pacijent_id' => fake()->randomElement(self::$pacijentIds),
+            'pacijent_id' => array_shift(self::$pacijentIds),  // kada se id pacijenta iskoristi jednom ne može se više koristiti to omogućava array_shifta
+
         ];
     }
 }

@@ -26,6 +26,9 @@ class DatabaseSeeder extends Seeder
         User::factory()->count(10)->state(['uloga' => 'pacijent'])->create();
 
         // čuvanje id-ova
+        // pristupanje statičkim promenljivima klase ZdravstveniKartonFactory
+        // pomoću pluck funkcije uzimaju se samo vrednost za id iz rezultata
+        // toArray pretvara pretvara Laravel kolekciju u običan niz
         ZdravstveniKartonFactory::$lekarIds = User::where('uloga', 'lekar')->pluck('id')->toArray();
         ZdravstveniKartonFactory::$medOsobljeIds = User::where('uloga', 'med_osoblje')->pluck('id')->toArray();
         ZdravstveniKartonFactory::$pacijentIds = User::where('uloga', 'pacijent')->pluck('id')->toArray();
@@ -36,7 +39,7 @@ class DatabaseSeeder extends Seeder
 
         // kreiranje pregleda i zdravstvenih kartona
         Pregled::factory()->count(20)->create();
-        ZdravstveniKarton::factory()->count(20)->create();
+        ZdravstveniKarton::factory()->count(10)->create();
         
     }
 }

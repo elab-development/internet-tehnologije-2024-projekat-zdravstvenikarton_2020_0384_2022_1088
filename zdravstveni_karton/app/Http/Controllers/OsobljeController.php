@@ -14,7 +14,7 @@ class OsobljeController extends Controller
         $osoblje = User::find($id);
 
         if ($osoblje->uloga !== 'med_osoblje') {
-            return response()->json("NEMA MEDICINSKOG OSOBLJA SA DATIM ID-om", 404);
+            return response()->json("MEDICINSKO OSOBLJE NIJE PRONEĐNO", 404);
         }
 
         // Pronađi sve preglede gde je osoblje učestvovalo
@@ -24,6 +24,21 @@ class OsobljeController extends Controller
 
         if ($pacijenti->isEmpty()) {
             return response()->json("NEMA PACIJENATA KOJI SU POVEZANI SA DATIM MED. OSOBLJEM");
+        }
+
+        return response()->json($pacijenti);
+    }
+
+    // Funkcija koja vraća sve pacijente koji su u redu čekanja na pregled
+    public function red_cekanja()
+    {
+        // Pronađi sve preglede gde je status "cekanje u redu"
+        $pregledi = Pregled::where('status','na_cekanju');
+        $pacijentIds = $pregledi->pluck('pacijent_id')->unique();
+        $pacijenti = User::whereIn('id', $pacijentIds)->get();
+
+        if ($pacijenti->isEmpty()) {
+            return response()->json("NEMA PACIJENATA U RED ČEKANJA");
         }
 
         return response()->json($pacijenti);

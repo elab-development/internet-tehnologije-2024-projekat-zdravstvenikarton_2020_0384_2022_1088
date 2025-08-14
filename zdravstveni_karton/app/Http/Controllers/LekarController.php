@@ -29,9 +29,8 @@ class LekarController extends Controller
     {
         // Provera da li lekar postoji
         $lekar = User::find($id);
-
         if ($lekar->uloga !== 'lekar') {
-            return response()->json("LEKAR NIJE PRONAĐEN", 404);
+            return response()->json("LEKAR NIJE PRONAĐEN",404);
         }
 
         // Dohvati sve preglede koje je obavio lekar

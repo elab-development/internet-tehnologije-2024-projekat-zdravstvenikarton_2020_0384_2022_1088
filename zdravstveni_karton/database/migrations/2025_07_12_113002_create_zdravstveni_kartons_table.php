@@ -22,7 +22,8 @@ return new class extends Migration
             // dodavanje spoljnih kljuceva
             $table->foreignId('lekar_id')->constrained('users');
             $table->foreignId('med_osoblje_id')->constrained('users');
-            $table->foreignId('pacijent_id')->constrained('users')->onDelete('cascade');
+            // neophodni unique da pi pacijent mogao da ima maksimalno jedan karton
+            $table->foreignId('pacijent_id')->constrained('users')->onDelete('cascade')->unique();
         });
     }
 
