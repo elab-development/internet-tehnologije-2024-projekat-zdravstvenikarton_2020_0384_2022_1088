@@ -16,7 +16,7 @@ class OsobljeController extends Controller
     {
         $osoblje = User::find($id);
 
-        if ($osoblje->uloga !== 'med_osoblje') {
+        if ($osoblje == null || $osoblje->uloga !== 'med_osoblje') {
             return response()->json("MEDICINSKO OSOBLJE NIJE PRONEĐNO", 404);
         }
 
@@ -52,15 +52,16 @@ class OsobljeController extends Controller
     {
         // provera med. osoblja
         $osoblje = User::find($id);
-        if ($osoblje->uloga !== 'med_osoblje') {
+        if ($osoblje == null || $osoblje->uloga !== 'med_osoblje') {
             return response()->json("MEDICINSKO OSOBLJE NIJE PRONEĐNO", 404);
         }
 
         // provera podataka kartona
         $validator = Validator::make($zahtev->all(), [
             'status' => 'required|string|in:aktivan,neaktivan',
-            'poslednja_terapija' => 'required|string|max:255',
-            'poslednja_dijagnoza' => 'required|string|max:255',
+            // poslednja_terapija i poslednja_dijagnoza nisu zahtevani 
+            'poslednja_terapija' => 'string|max:255',
+            'poslednja_dijagnoza' => 'string|max:255',
             'lekar_id' => ['required', 'integer', Rule::exists('users', 'id')->where('uloga', 'lekar')],
             'pacijent_id' => ['required', 'integer', Rule::exists('users', 'id')->where('uloga', 'pacijent')],
         ]);
@@ -68,7 +69,6 @@ class OsobljeController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
 
         // kreiranje ZdravstvenogKratona
         $z_karton = ZdravstveniKarton::create([

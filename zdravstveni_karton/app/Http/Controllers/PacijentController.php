@@ -13,7 +13,7 @@ class PacijentController extends Controller
     {
         // Provera da li pacijent postoji
         $pacijent = User::find($id);
-        if ($pacijent->uloga !== 'pacijent') {
+        if ($pacijent == null || $pacijent->uloga !== 'pacijent') {
             return response()->json("PACIJENT NIJE PRONAĐEN", 404);
         }
         // sa where se vraća samo objekat i da bi dobili instancu nakon toga mora da ide (get(),first(),...)

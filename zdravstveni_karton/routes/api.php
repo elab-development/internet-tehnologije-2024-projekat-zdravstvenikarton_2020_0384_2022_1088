@@ -5,8 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LekarController;
 use App\Http\Controllers\OsobljeController;
 use App\Http\Controllers\PacijentController;
-use App\Models\ZdravstveniKarton;
-use App\Http\Controllers\ZdravstveniKartonController;
+use App\Http\Controllers\PregledController;  // koristi se za resource rutu
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -36,4 +35,4 @@ Route::get('/pacijent/{id}/z_karton',[PacijentController::class,'z_karton']);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // RESURSNA RUTA ZA ZDRAVSTVENI KARTON
-Route::resource('/karton',ZdravstveniKartonController::class);
+Route::resource('/pregled',PregledController::class);

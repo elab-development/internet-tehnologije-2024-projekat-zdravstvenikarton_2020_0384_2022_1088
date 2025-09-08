@@ -76,13 +76,13 @@ class User extends Authenticatable
         return $this->hasOne(ZdravstveniKarton::class, 'pacijent_id');
     }
  
-    // 4. Veza lekara ka z. kartonu
+    // 5. Veza lekara ka z. kartonu
     public function kartoniLekar()
     {
         return $this->hasMany(ZdravstveniKarton::class, 'lekar_id');
     }
  
-    // 4. Veza med. osoblja ka z. kartonu
+    // 6. Veza med. osoblja ka z. kartonu
     public function kartoniOsoblje()
     {
         return $this->hasMany(ZdravstveniKarton::class, 'osoblje_id');

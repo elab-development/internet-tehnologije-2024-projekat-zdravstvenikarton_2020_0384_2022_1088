@@ -9,20 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('pregleds', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('dijagnoza');
-            $table->string('terapija');
-            $table->date('datum');
-            $table->string('status');
+        public function up(): void
+        {
+            Schema::create('pregleds', function (Blueprint $table) {
+                $table->id();
+                $table->timestamps();
+                $table->string('dijagnoza')->nullable();
+                $table->string('terapija')->nullable();
+                $table->date('datum')->nullable();
+                $table->string('status');
 
-            // spoljni ključevi dodati u posebnoj migraciji
-            
-        });
-    }
+                // spoljni ključevi dodati u posebnoj migraciji
+                
+            });
+        }
 
     /**
      * Reverse the migrations.

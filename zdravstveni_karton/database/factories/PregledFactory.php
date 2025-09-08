@@ -23,7 +23,7 @@ class PregledFactory extends Factory
     public function definition(): array
     {
         return [
-            'dijagnoza' => fake()->randomElement(['upala pluća', 'Anemia aplastiqa', 'boginje']),
+            'dijagnoza' => fake()->randomElement(['upala pluća', 'prelom', 'boginje']),
             'terapija' => fake()->randomElement(['paracetamol', 'fizikalna', 'panklav', 'brufen']),
             'datum' => fake()->date(),
             'status' => fake()->randomElement(['na_cekanju', 'zavrsen']),
