@@ -6,6 +6,7 @@ use App\Http\Controllers\LekarController;
 use App\Http\Controllers\OsobljeController;
 use App\Http\Controllers\PacijentController;
 use App\Models\ZdravstveniKarton;
+use App\Http\Controllers\ZdravstveniKartonController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -35,4 +36,4 @@ Route::get('/pacijent/{id}/z_karton',[PacijentController::class,'z_karton']);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // RESURSNA RUTA ZA ZDRAVSTVENI KARTON
-Route::resource('/karton',ZdravstveniKarton::class);
+Route::resource('/karton',ZdravstveniKartonController::class);
