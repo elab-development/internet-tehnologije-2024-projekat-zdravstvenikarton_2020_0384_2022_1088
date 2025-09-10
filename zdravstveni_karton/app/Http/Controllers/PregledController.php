@@ -109,7 +109,7 @@ class PregledController extends Controller
     {
         // provera pregleda
         $pregled = Pregled::find($idPregleda);
-        if ($pregled == null && $pregled->status == 'na_cekanju') {
+        if ($pregled == null || $pregled->status == 'na_cekanju') {
             return response()->json("NEMA PREGLEDA SA DATIM ID-om", 404);
         }
 

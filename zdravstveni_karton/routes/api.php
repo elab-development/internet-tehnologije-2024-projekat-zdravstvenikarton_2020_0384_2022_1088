@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LekarController;
 use App\Http\Controllers\OsobljeController;
 use App\Http\Controllers\PacijentController;
@@ -36,3 +37,6 @@ Route::get('/pacijent/{id}/z_karton',[PacijentController::class,'z_karton']);
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // RESURSNA RUTA ZA ZDRAVSTVENI KARTON
 Route::resource('/pregled',PregledController::class);
+
+// RUTE ZA AUTENTIFIKACIJU
+Route::post('/register', [AuthController::class, 'register']);
