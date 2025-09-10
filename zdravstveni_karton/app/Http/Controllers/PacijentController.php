@@ -11,7 +11,7 @@ class PacijentController extends Controller
     //Funkcija koja vraća podatke o zdravstvenom kartonu pacijenta
     public function z_karton($id)
     {
-        // Provera da li pacijent postoji
+        // provera da li pacijent postoji
         $pacijent = User::find($id);
         if ($pacijent == null || $pacijent->uloga !== 'pacijent') {
             return response()->json("PACIJENT NIJE PRONAĐEN", 404);

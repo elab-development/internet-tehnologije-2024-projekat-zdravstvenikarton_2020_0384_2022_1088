@@ -20,7 +20,7 @@ class OsobljeController extends Controller
             return response()->json("MEDICINSKO OSOBLJE NIJE PRONEĐNO", 404);
         }
 
-        // Pronađi sve preglede gde je osoblje učestvovalo
+        // pronađi sve preglede gde je osoblje učestvovalo
         $pregledi = Pregled::where('med_osoblje_id', $id);
         $pacijentIds = $pregledi->pluck('pacijent_id')->unique();
         $pacijenti = User::whereIn('id', $pacijentIds)->get();
@@ -35,7 +35,7 @@ class OsobljeController extends Controller
     // Funkcija koja vraća sve pacijente koji su u redu čekanja na pregled
     public function red_cekanja()
     {
-        // Pronađi sve preglede gde je status "cekanje u redu"
+        // pronađi sve preglede gde je status "cekanje u redu"
         $pregledi = Pregled::where('status', 'na_cekanju');
         $pacijentIds = $pregledi->pluck('pacijent_id')->unique();
         $pacijenti = User::whereIn('id', $pacijentIds)->get();

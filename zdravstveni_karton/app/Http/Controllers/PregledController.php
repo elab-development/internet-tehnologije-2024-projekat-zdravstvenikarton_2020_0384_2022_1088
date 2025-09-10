@@ -26,8 +26,8 @@ class PregledController extends Controller
         //
     }
 
-    // funkcija koja omogućava da se pacijent stavi u red čekanja na pregled
-    // stavljanje pacijenta u red čekanja predstavlja kreiranje pregleda od strane med. osoblja
+    // Funkcija koja omogućava da se pacijent stavi u red čekanja na pregled
+    // Stavljanje pacijenta u red čekanja predstavlja kreiranje pregleda od strane med. osoblja
     public function store(Request $zahtev)
     {
         // provera podataka za pregled
@@ -74,7 +74,7 @@ class PregledController extends Controller
         //
     }
 
-    // funkcija koja omogućava lekaru da obavi pregled
+    // Funkcija koja omogućava lekaru da obavi pregled
     public function update(Request $zahtev, $idPregleda)
     {
 
@@ -104,7 +104,7 @@ class PregledController extends Controller
         return response()->json("USPEŠNO OBAVLJEN PREGLED", 200);
     }
 
-    // brisanje pregleda od strane med. osoblja
+    // Brisanje pregleda od strane med. osoblja
     public function destroy($idPregleda)
     {
         // provera pregleda
