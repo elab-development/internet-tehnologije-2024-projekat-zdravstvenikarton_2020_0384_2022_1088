@@ -17,6 +17,9 @@ class AuthController extends Controller
         }
 
         $user = User::where('email', $request->email)->firstOrFail();
+
+        // brišemo token u slučaju da je već kreiran
+        $user->tokens()->delete();
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json(['message' => 'ZDRAVO ' . $user->username . ', DOBRO DOŠLI NAZAD', 'access_token' => $token, 'token_type' => 'Bearer']);
@@ -67,5 +70,12 @@ class AuthController extends Controller
         return response()->json([
             'USPEŠNO STE SE ODJAVILI'
         ]);
+    }
+
+    // Funkcija koja vraća podatke za trenutno prijavljenog korisnika
+    public function myAccount()
+    {
+        $user = Auth::user();
+        return response()->json(['poruka' => "PRIJAVLJENI KORISNIK", 'korisnik' => $user]);
     }
 }

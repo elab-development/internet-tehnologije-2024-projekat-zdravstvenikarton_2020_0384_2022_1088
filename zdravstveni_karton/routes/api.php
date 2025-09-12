@@ -8,36 +8,39 @@ use App\Http\Controllers\OsobljeController;
 use App\Http\Controllers\PacijentController;
 use App\Http\Controllers\PregledController;  // koristi se za resource rutu
 
-Route::get('user', function (Request $request) {
+/*Route::get('user', function (Request $request) {
     return $request->user();
-})->middleware('auth:sanctum');
+})->middleware('auth:sanctum');*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
-// LEKARI
-// Vraća sve preglede jednog lekara
-Route::get('lekar/{id}/pregledi', [LekarController::class, 'pregledi']);
-// Vraća sve pacijente koji su pregledani kod lekara ili čekaju red kod njega
-Route::get('lekar/{id}/pacijenti', [LekarController::class, 'pacijenti']);
+Route::group(['middleware' => ['auth:sanctum']], function () {
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-// MED. OSOBLJE
-// Vraća sve pacijente koji su povezani sa datim med. osobljem
-Route::get('med_osoblje/{id}/pacijenti',[OsobljeController::class,'pacijenti']);
-// Vraća sve pacijente koji imaju pregld sa statusom "čekanje u redu"
-Route::get('med_osoblje/red_cekanja',[OsobljeController::class,'red_cekanja']);
-// Kreiranje zdravstvenog kartona za pacijenta
-Route::post('med_osoblje/{id}/kreiranje_kartona',[OsobljeController::class,'kreiranje_kartona']); 
+    // LEKARI
+    // Vraća sve preglede jednog lekara
+    Route::get('lekar/{id}/pregledi', [LekarController::class, 'pregledi']);
+    // Vraća sve pacijente koji su pregledani kod lekara ili čekaju red kod njega
+    Route::get('lekar/{id}/pacijenti', [LekarController::class, 'pacijenti']);
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-// PACIJENT
-Route::get('pacijent/{id}/z_karton',[PacijentController::class,'z_karton']);
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // MED. OSOBLJE
+    // Vraća sve pacijente koji su povezani sa datim med. osobljem
+    Route::get('med-osoblje/{id}/pacijenti', [OsobljeController::class, 'pacijenti']);
+    // Vraća sve pacijente koji imaju pregld sa statusom "čekanje u redu"
+    Route::get('med-osoblje/red-cekanja', [OsobljeController::class, 'redCekanja']);
+    // Kreiranje zdravstvenog kartona za pacijenta
+    Route::post('med-osoblje/{id}/kreiranje-kartona', [OsobljeController::class, 'kreiranjeKartona']);
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-// RESURSNA RUTA ZA ZDRAVSTVENI KARTON
-Route::resource('pregled',PregledController::class);
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // PACIJENT
+    Route::get('pacijent/{id}/z-karton', [PacijentController::class, 'zKarton']);
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////
+    // RESURSNA RUTA ZA ZDRAVSTVENI KARTON
+    Route::resource('pregled', PregledController::class);
+});
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // RUTE ZA AUTENTIFIKACIJU
 Route::post('register', [AuthController::class, 'register']);
-Route::post('login',[AuthController::class,'login']);
-Route::post('logout',[AuthController::class,'logout'])->middleware('auth:sanctum');
+Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::get('my-account', [AuthController::class, 'myAccount'])->middleware('auth:sanctum');

@@ -33,7 +33,7 @@ class OsobljeController extends Controller
     }
 
     // Funkcija koja vraća sve pacijente koji su u redu čekanja na pregled
-    public function red_cekanja()
+    public function redCekanja()
     {
         // pronađi sve preglede gde je status "cekanje u redu"
         $pregledi = Pregled::where('status', 'na_cekanju');
@@ -48,7 +48,7 @@ class OsobljeController extends Controller
     }
 
     // Funkcija koja kreira zdravstveni karton za pacijenta
-    public function kreiranje_kartona($id, Request $zahtev)
+    public function kreiranjeKartona($id, Request $zahtev)
     {
         // provera med. osoblja
         $osoblje = User::find($id);
