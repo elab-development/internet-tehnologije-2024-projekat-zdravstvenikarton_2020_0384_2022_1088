@@ -1,0 +1,34 @@
+.App {
+  text-align: center;
+}
+
+.navMeni{
+  display: flex;
+  background-color:aquamarine;
+  height: 70px;
+  margin-top: 0px;
+  gap:10px;
+  justify-content: center;
+  align-items: center;
+}
+
+a{
+  color:white;
+}
+
+.pocetna{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formaPrijava{
+  display: flex;
+  flex-direction: column;
+  width: 200px; 
+  gap:15px;
+}
+
+
+
+
