@@ -29,6 +29,26 @@ a{
   gap:15px;
 }
 
+.kontejnerKorisnici {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
 
+.karticaKorisnik {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 10px;
+  background-color: bisque;
+  gap: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  opacity: 50%;
+}
 
+.karticaKorisnik>div {
+  display: flex;
+  gap: 20px;
+}
 

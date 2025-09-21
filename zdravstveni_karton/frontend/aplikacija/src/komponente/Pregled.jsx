@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function MojPregled({korisnik}) {
+export default function Pregled({korisnik}) {
   return (
     <div>
      <> <label> Id pregleda </label>  <label>{korisnik.jmbg} </label> </>
