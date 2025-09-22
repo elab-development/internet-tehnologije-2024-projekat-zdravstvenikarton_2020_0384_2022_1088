@@ -2,31 +2,39 @@
   text-align: center;
 }
 
-.navMeni{
+.navMeni {
   display: flex;
-  background-color:aquamarine;
+  background-color: aquamarine;
   height: 70px;
   margin-top: 0px;
-  gap:10px;
+  gap: 10px;
   justify-content: center;
   align-items: center;
 }
 
-a{
-  color:white;
+a {
+  color: white;
 }
 
-.pocetna{
+.pocetna {
   display: flex;
   flex-direction: column;
+  min-height: 100vh; /* cela visina browser-a */
   align-items: center;
+  background: linear-gradient(45deg, rgba(58, 90, 64, 1) 0%, rgba(218, 215, 205, 1) 50%);
 }
 
-.formaPrijava{
+.teloPocetne{
   display: flex;
   flex-direction: column;
-  width: 200px; 
-  gap:15px;
+  margin-top: 100px;
+}
+
+.formaPrijava {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  gap: 15px;
 }
 
 .kontejnerKorisnici {
@@ -51,4 +59,3 @@ a{
   display: flex;
   gap: 20px;
 }
-
