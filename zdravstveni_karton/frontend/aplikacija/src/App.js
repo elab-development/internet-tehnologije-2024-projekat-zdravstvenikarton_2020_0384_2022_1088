@@ -3,6 +3,9 @@ import './App.css';
 import NavMeni from './komponente/NavMeni';
 import Korisnik from './komponente/Korisnik';
 import Korisnici from './komponente/Korisnici';
+import Pocetna from './komponente/Pocetna';
+import { BrowserRouter, Routes, Route,NavLink } from "react-router-dom";
+
 
 const nizKorisnik = [
   {
@@ -81,7 +84,13 @@ const nizKorisnik = [
 function App() {
   return (
     <div className="App">
-      <Korisnici korisnici={nizKorisnik}/>
+      <BrowserRouter>
+
+        <Routes>
+          <Route path="/" element={<Pocetna />} />
+        </Routes>
+
+      </BrowserRouter>
     </div>
   );
 }
