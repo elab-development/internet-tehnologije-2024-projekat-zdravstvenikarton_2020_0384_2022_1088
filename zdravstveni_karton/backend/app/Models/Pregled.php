@@ -14,7 +14,7 @@ class Pregled extends Model
     protected $fillable = [
         'dijagnoza',
         'terapija',
-        'datum',
+        'vreme_zavrsetka',
         'status',
 
         // spoljni ključevi

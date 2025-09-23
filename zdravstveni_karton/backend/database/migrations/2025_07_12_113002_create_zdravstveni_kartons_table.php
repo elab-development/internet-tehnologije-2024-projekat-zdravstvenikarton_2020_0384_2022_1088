@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->enum('status', ['aktivan', 'neaktivan']);
-            $table->string('poslednja_dijagnoza');
-            $table->string('poslednja_terapija');
+            $table->string('poslednja_dijagnoza') ->nullable();
+            $table->string('poslednja_terapija')->nullable();
             
 
             // dodavanje spoljnih kljuceva

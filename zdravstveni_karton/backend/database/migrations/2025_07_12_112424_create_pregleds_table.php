@@ -16,7 +16,7 @@ return new class extends Migration
                 $table->timestamps();
                 $table->string('dijagnoza')->nullable();
                 $table->string('terapija')->nullable();
-                $table->date('datum')->nullable();
+                $table->dateTime('vreme_zavrsetka')->nullable();
                 $table->string('status');
 
                 // spoljni ključevi dodati u posebnoj migraciji

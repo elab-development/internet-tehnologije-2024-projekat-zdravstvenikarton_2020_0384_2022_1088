@@ -35,7 +35,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('pacijent/{id}/z-karton', [PacijentController::class, 'zKarton']);
 
     /////////////////////////////////////////////////////////////////////////////////////////////////
-    // RESURSNA RUTA ZA ZDRAVSTVENI KARTON
+    // RESURSNA RUTA ZA PREGLED
     Route::resource('pregled', PregledController::class);
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////

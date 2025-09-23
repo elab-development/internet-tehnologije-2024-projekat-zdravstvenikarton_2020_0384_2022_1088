@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Pregled;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Carbon\Carbon;
+
 
 class PregledController extends Controller
 {
@@ -49,7 +51,7 @@ class PregledController extends Controller
             'status' => 'na_cekanju',
             'dijagnoza' => '/',
             'terapija' => '/',
-            'datum' => null
+            'vreme_zavrsetka' => null
         ]);
 
         return response()->json([
@@ -88,7 +90,6 @@ class PregledController extends Controller
         $validator = Validator::make($zahtev->all(), [
             'dijagnoza' => 'required|string|max:255',
             'terapija' => 'required|string|max:255',
-            'datum' => 'required|date'
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
@@ -97,9 +98,19 @@ class PregledController extends Controller
         // izmena(obavljanje) pregleda
         $pregled->dijagnoza = $zahtev->dijagnoza;
         $pregled->terapija = $zahtev->terapija;
-        $pregled->datum = $zahtev->datum;
+        $pregled->vreme_zavrsetka = Carbon::now();
         $pregled->status = "završen";
         $pregled->save();
+
+        // azuriranje zdravstvenog kartona
+        $pacijentId = $pregled->pacijent_id;
+        $zdravstveniKarton = ZdravstveniKarton::where('pacijent_id', $pacijentId)->first();
+        if ($zdravstveniKarton) {
+            $zdravstveniKarton->poslednja_dijagnoza = $zahtev->dijagnoza;
+            $zdravstveniKarton->poslednja_terapija = $zahtev->terapija;
+            $zdravstveniKarton->save();
+        }
+
 
         return response()->json("USPEŠNO OBAVLJEN PREGLED", 200);
     }
