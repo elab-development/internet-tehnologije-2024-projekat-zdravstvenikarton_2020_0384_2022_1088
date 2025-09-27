@@ -12,8 +12,14 @@
   align-items: center;
 }
 
-a {
+.navMeni>a {
   color: white;
+  /*background-color: #38A3A5;*/
+  padding: 5px;
+}
+
+a:hover{
+  color:black;
 }
 
 .pocetna {
@@ -47,15 +53,14 @@ a {
 
 .kartica {
   display: flex;
-  background-color: #57CC99;
+  background-color: #C7F9CC;
   min-width: 300px;
   flex-direction: column;
   padding: 10px;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 12px 10px rgba(0, 0, 0, 0.35);
   gap: 10px;
-  border: 2px solid black;
+  border: 1px solid #57CC99;
   border-radius: 10px;
-  opacity: 50%;
 }
 
 .kartica>div {

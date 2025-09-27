@@ -1,10 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import NavMeni from './komponente/NavMeni';
-import Korisnik from './komponente/Korisnik';
 import Korisnici from './komponente/Korisnici';
 import Pocetna from './komponente/Pocetna';
-import { BrowserRouter, Routes, Route,NavLink } from "react-router-dom";
+import { BrowserRouter, Routes, Route, NavLink, useLocation } from "react-router-dom";
 import Pregledi from './komponente/Pregledi';
 import Kartoni from './komponente/Kartoni';
 
@@ -21,28 +19,28 @@ const korisnici = [
     ime: "Ana",
     prezime: "Petrović",
     username: "ana_p",
-    uloga: "pacijent"
+    uloga: "lekar"
   },
   {
     jmbg: "2505983456123",
     ime: "Nikola",
     prezime: "Medić",
     username: "nikola_med",
-    uloga: "med_osoblje"
+    uloga: "lekar"
   },
   {
     jmbg: "1502957890123",
     ime: "Jovana",
     prezime: "Jović",
     username: "jovana77",
-    uloga: "pacijent"
+    uloga: "med_osoblje"
   },
   {
     jmbg: "3004884567891",
     ime: "Dragan",
     prezime: "Đurić",
     username: "dragan_d",
-    uloga: "lekar"
+    uloga: "med_osoblje"
   },
   {
     jmbg: "0407991234567",
@@ -63,14 +61,14 @@ const korisnici = [
     ime: "Mila",
     prezime: "Milić",
     username: "mila88",
-    uloga: "lekar"
+    uloga: "pacijent"
   },
   {
     jmbg: "0905014567890",
     ime: "Vuk",
     prezime: "Vukić",
     username: "vuk_v",
-    uloga: "med_osoblje"
+    uloga: "pacijent"
   },
   {
     jmbg: "2212017896543",
@@ -88,29 +86,29 @@ const pregledi = [
     status: "završen",
     dijagnoza: "Grip",
     terapija: "Amoksicilin",
-    pacijent: "Marko Marković",
-    lekar: "Dr. Pera Perić",
-    medicinskoOsoblje: "Jovan Jovanović",
+    pacijent: "Petar Petrović",
+    lekar: "Dr. Marko Marković",
+    medicinskoOsoblje: "Jovana Jović",
   },
   {
     id: 2,
-    datumZavrsetka: "2025-09-02",
+    datumZavrsetka: "/",
     status: "na čekanju",
-    dijagnoza: "Povišena temperatura",
-    terapija: "Paracetamol",
-    pacijent: "Ana Petrović",
-    lekar: "Dr. Jelena Jelić",
-    medicinskoOsoblje: "Milan Ilić",
+    dijagnoza: "/",
+    terapija: "/",
+    pacijent: "Petar Petrović",
+    lekar: "Dr. Ana Petrović",
+    medicinskoOsoblje: "Jovana Jović",
   },
   {
     id: 3,
-    datumZavrsetka: "2025-09-03",
+    datumZavrsetka: "/",
     status: "na čekanju",
-    dijagnoza: "Bol u leđima",
-    terapija: "Fizioterapija",
-    pacijent: "Nikola Nikolić",
-    lekar: "Dr. Ivana Ivković",
-    medicinskoOsoblje: "Maja Majić",
+    dijagnoza: "/",
+    terapija: "/",
+    pacijent: "Mila Milić",
+    lekar: "Dr. Ana Petrović",
+    medicinskoOsoblje: "Dragan Đurić",
   },
   {
     id: 4,
@@ -118,29 +116,29 @@ const pregledi = [
     status: "završen",
     dijagnoza: "Alergija",
     terapija: "Antihistaminici",
-    pacijent: "Milica Milić",
-    lekar: "Dr. Tamara Tanasić",
-    medicinskoOsoblje: "Stefan Stojković",
+    pacijent: "Vuk Vukić",
+    lekar: "Dr. Nikola Medić",
+    medicinskoOsoblje: "Ivana Simić",
   },
   {
     id: 5,
-    datumZavrsetka: "2025-09-05",
+    datumZavrsetka: "/",
     status: "na čekanju",
-    dijagnoza: "Prehlada",
-    terapija: "Vitamin C i čaj",
-    pacijent: "Stefan Stefanović",
-    lekar: "Dr. Marija Marić",
-    medicinskoOsoblje: "Ivana Ilić",
+    dijagnoza: "/",
+    terapija: "/",
+    pacijent: "Sofija Sofronić",
+    lekar: "Dr. Marko Marković",
+    medicinskoOsoblje: "Jovan Jović",
   },
   {
     id: 6,
-    datumZavrsetka: "2025-09-06",
+    datumZavrsetka: "/",
     status: "na čekanju",
-    dijagnoza: "Migrena",
-    terapija: "Analgetici",
-    pacijent: "Jelena Jelić",
-    lekar: "Dr. Aleksandar Aleksić",
-    medicinskoOsoblje: "Nenad Nikolić",
+    dijagnoza: "/",
+    terapija: "/",
+    pacijent: "Petar Petrović",
+    lekar: "Dr. Ana Petrović",
+    medicinskoOsoblje: "Dragan Đurić",
   },
   {
     id: 7,
@@ -148,29 +146,29 @@ const pregledi = [
     status: "završen",
     dijagnoza: "Upala grla",
     terapija: "Antibiotici",
-    pacijent: "Luka Lukić",
-    lekar: "Dr. Katarina Katić",
-    medicinskoOsoblje: "Miloš Milojević",
+    pacijent: "Mila Milić",
+    lekar: "Dr. Nikola Medić",
+    medicinskoOsoblje: "Dragan Đurić",
   },
   {
     id: 8,
-    datumZavrsetka: "2025-09-08",
+    datumZavrsetka: "/",
     status: "na čekanju",
-    dijagnoza: "Stomačne tegobe",
-    terapija: "Probiotici",
-    pacijent: "Teodora Todorović",
-    lekar: "Dr. Milan Milićević",
-    medicinskoOsoblje: "Jasna Jovanović",
+    dijagnoza: "/",
+    terapija: "/",
+    pacijent: "Vuk Vukić",
+    lekar: "Dr. Nikola Medić",
+    medicinskoOsoblje: "Ivana Simić",
   },
   {
     id: 9,
-    datumZavrsetka: "2025-09-09",
+    datumZavrsetka: "/",
     status: "na čekanju",
-    dijagnoza: "Povišen pritisak",
-    terapija: "Beta blokatori",
-    pacijent: "Nemanja Nedić",
-    lekar: "Dr. Bojana Bojić",
-    medicinskoOsoblje: "Petar Petrović",
+    dijagnoza: "/",
+    terapija: "/",
+    pacijent: "Sofija Sofronić",
+    lekar: "Dr. Ana Petrović",
+    medicinskoOsoblje: "Jovana Jović",
   },
   {
     id: 10,
@@ -178,120 +176,118 @@ const pregledi = [
     status: "završen",
     dijagnoza: "Dijabetes",
     terapija: "Insulin",
-    pacijent: "Sara Sarić",
-    lekar: "Dr. Vuk Vukić",
-    medicinskoOsoblje: "Mira Mirić",
+    pacijent: "Vuk Vukić",
+    lekar: "Dr. Marko Marković",
+    medicinskoOsoblje: "Jovana Jović",
   }
 ];
 
 const kartoni = [
   {
     id: 1,
-    status: "završen",
+    status: "aktivan",
     poslednjaTerapija: "Amoksicilin",
     poslednjaDijagnoza: "Grip",
-    pacijent: "Marko Marković",
-    lekar: "Dr. Pera Perić",
-    medicinskoOsoblje: "Jovan Jovanović",
+    pacijent: "Petar Petrović",
+    lekar: "Marko Marković",
+    medicinskoOsoblje: "Jovana Jović",
   },
   {
     id: 2,
-    status: "na čekanju",
+    status: "neaktivan",
     poslednjaTerapija: "Paracetamol",
-    poslednjaDijagnoza: "Povišena temperatura",
-    pacijent: "Ana Petrović",
-    lekar: "Dr. Jelena Jelić",
-    medicinskoOsoblje: "Milan Ilić",
+    poslednjaDijagnoza: "Prehlada",
+    pacijent: "Mila Milić",
+    lekar: "Ana Petrović",
+    medicinskoOsoblje: "Ivana Simić",
   },
   {
     id: 3,
-    status: "završen",
-    poslednjaTerapija: "Fizioterapija",
-    poslednjaDijagnoza: "Bol u leđima",
-    pacijent: "Nikola Nikolić",
-    lekar: "Dr. Ivana Ivković",
-    medicinskoOsoblje: "Maja Majić",
+    status: "aktivan",
+    poslednjaTerapija: "Ibuprofen",
+    poslednjaDijagnoza: "Upala grla",
+    pacijent: "Vuk Vukić",
+    lekar: "Nikola Medić",
+    medicinskoOsoblje: "Dragan Đurić",
   },
   {
     id: 4,
-    status: "na čekanju",
-    poslednjaTerapija: "Antihistaminici",
-    poslednjaDijagnoza: "Alergija",
-    pacijent: "Milica Milić",
-    lekar: "Dr. Tamara Tanasić",
-    medicinskoOsoblje: "Stefan Stojković",
+    status: "aktivan",
+    poslednjaTerapija: "Aspirin",
+    poslednjaDijagnoza: "Glavobolja",
+    pacijent: "Sofija Sofronić",
+    lekar: "Marko Marković",
+    medicinskoOsoblje: "Jovana Jović",
   },
   {
     id: 5,
-    status: "završen",
-    poslednjaTerapija: "Vitamin C i čaj",
-    poslednjaDijagnoza: "Prehlada",
-    pacijent: "Stefan Stefanović",
-    lekar: "Dr. Marija Marić",
-    medicinskoOsoblje: "Ivana Ilić",
+    status: "neaktivan",
+    poslednjaTerapija: "Vitamin C",
+    poslednjaDijagnoza: "Umor",
+    pacijent: "Petar Petrović",
+    lekar: "Ana Petrović",
+    medicinskoOsoblje: "Ivana Simić",
   },
   {
     id: 6,
-    status: "na čekanju",
-    poslednjaTerapija: "Analgetici",
-    poslednjaDijagnoza: "Migrena",
-    pacijent: "Jelena Jelić",
-    lekar: "Dr. Aleksandar Aleksić",
-    medicinskoOsoblje: "Nenad Nikolić",
+    status: "aktivan",
+    poslednjaTerapija: "Antibiotik",
+    poslednjaDijagnoza: "Upala pluća",
+    pacijent: "Mila Milić",
+    lekar: "Nikola Medić",
+    medicinskoOsoblje: "Dragan Đurić",
   },
   {
     id: 7,
-    status: "završen",
-    poslednjaTerapija: "Antibiotici",
-    poslednjaDijagnoza: "Upala grla",
-    pacijent: "Luka Lukić",
-    lekar: "Dr. Katarina Katić",
-    medicinskoOsoblje: "Miloš Milojević",
+    status: "neaktivan",
+    poslednjaTerapija: "Kapi za nos",
+    poslednjaDijagnoza: "Sinusitis",
+    pacijent: "Vuk Vukić",
+    lekar: "Marko Marković",
+    medicinskoOsoblje: "Jovana Jović",
   },
   {
     id: 8,
-    status: "na čekanju",
-    poslednjaTerapija: "Probiotici",
-    poslednjaDijagnoza: "Stomačne tegobe",
-    pacijent: "Teodora Todorović",
-    lekar: "Dr. Milan Milićević",
-    medicinskoOsoblje: "Jasna Jovanović",
+    status: "aktivan",
+    poslednjaTerapija: "Magnezijum",
+    poslednjaDijagnoza: "Grčevi",
+    pacijent: "Sofija Sofronić",
+    lekar: "Ana Petrović",
+    medicinskoOsoblje: "Ivana Simić",
   },
   {
     id: 9,
-    status: "završen",
-    poslednjaTerapija: "Beta blokatori",
-    poslednjaDijagnoza: "Povišen pritisak",
-    pacijent: "Nemanja Nedić",
-    lekar: "Dr. Bojana Bojić",
-    medicinskoOsoblje: "Petar Petrović",
+    status: "neaktivan",
+    poslednjaTerapija: "Kortikosteroid",
+    poslednjaDijagnoza: "Alergija",
+    pacijent: "Petar Petrović",
+    lekar: "Nikola Medić",
+    medicinskoOsoblje: "Dragan Đurić",
   },
   {
     id: 10,
-    status: "završen",
-    poslednjaTerapija: "Insulin",
-    poslednjaDijagnoza: "Dijabetes",
-    pacijent: "Sara Sarić",
-    lekar: "Dr. Vuk Vukić",
-    medicinskoOsoblje: "Mira Mirić",
+    status: "aktivan",
+    poslednjaTerapija: "Antiseptik",
+    poslednjaDijagnoza: "Posekotina",
+    pacijent: "Mila Milić",
+    lekar: "Marko Marković",
+    medicinskoOsoblje: "Jovana Jović",
   }
 ];
 
 
 function App() {
+  const lokacija = useLocation(); // mora biti const
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <NavMeni/>
-        <Routes>
-          <Route path="/" element={<Pocetna />} />
-          <Route path="/pregledi" element={<Pregledi pregledi = {pregledi} />} />
-          <Route path="/korisnici" element={<Korisnici korisnici = {korisnici} />} />
-          <Route path="/kartoni" element={<Kartoni kartoni = {kartoni} />} />
-        </Routes>
-
-      </BrowserRouter>
-      
+      {lokacija.pathname === "/" ? null : <NavMeni />}
+      <Routes>
+        <Route path="/" element={<Pocetna />} />
+        <Route path="/pregledi" element={<Pregledi pregledi={pregledi} />} />
+        <Route path="/korisnici" element={<Korisnici korisnici={korisnici} />} />
+        <Route path="/kartoni" element={<Kartoni kartoni={kartoni} />} />
+      </Routes>
     </div>
   );
 }
