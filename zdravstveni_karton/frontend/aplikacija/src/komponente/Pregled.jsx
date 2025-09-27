@@ -1,14 +1,14 @@
 import React from "react";
 
-export default function Pregled({korisnik}) {
+export default function Pregled({pregled}) {
   return (
-    <div>
-     <> <label> Id pregleda </label>  <label>{korisnik.jmbg} </label> </>
-     <> <label> Datum završetka </label>  <label>{korisnik.jmbg} </label> </>
-     <> <label>  Status </label>  <label>{korisnik.jmbg} </label> </>
-     <> <label> Dijagnoza </label>  <label>{korisnik.jmbg} </label> </>
-     <> <label> Pacijent  </label>  <label>{korisnik.jmbg} </label> </>
-     <> <label> Medicinsko osoblje </label>  <label>{korisnik.jmbg} </label> </> 
+    <div className="karticaPregled">
+      <div> <label> Id pregleda </label>  <label>{pregled.jmbg} </label> </div>
+      <div> <label> Datum završetka </label>  <label>{pregled.jmbg} </label> </div>
+      <div> <label> Status </label>  <label>{pregled.jmbg} </label> </div>
+      <div> <label> Dijagnoza </label>  <label>{pregled.jmbg} </label> </div>
+      <div> <label> Pacijent  </label>  <label>{pregled.jmbg} </label> </div>
+      <div> <label> Medicinsko osoblje </label>  <label>{pregled.jmbg} </label> </div>
     </div>
   );
 }

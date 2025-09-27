@@ -1,12 +1,12 @@
 import React from 'react'
-import Korisnik from './Korisnik'
+import Pregled from './Pregled';
 
-function Pregledi({k}) {
+function Pregledi({pregledi}) {
   return (
-    <div>
+    <div className='kontejnerPregledi'>
       {
-        k.map((korisnik) => {
-          return <Korisnik korisnik={korisnik[k.jmbg]}/>;
+        pregledi.map((p) => {
+          return <Pregled pregled={p}/>;
         })
       }
     </div>

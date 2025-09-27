@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ZdravstveniKarton = () => {
+const Kartoni = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const ZdravstveniKarton = () => {
   )
 }
 
-export default ZdravstveniKarton
+export default Kartoni
