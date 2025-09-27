@@ -3,7 +3,7 @@ import Korisnik from './Korisnik'
 
 function Korisnici({korisnici}) {
   return (
-    <div className='kontejnerKorisnici'>
+    <div className='kontejner'>
       {korisnici.map((k) => {
         return (
             <Korisnik korisnik={k}/>

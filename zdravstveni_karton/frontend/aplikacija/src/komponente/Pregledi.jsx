@@ -3,7 +3,7 @@ import Pregled from './Pregled';
 
 function Pregledi({pregledi}) {
   return (
-    <div className='kontejnerPregledi'>
+    <div className='kontejner'>
       {
         pregledi.map((p) => {
           return <Pregled pregled={p}/>;

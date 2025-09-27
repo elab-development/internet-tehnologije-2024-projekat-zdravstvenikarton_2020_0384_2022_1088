@@ -4,7 +4,7 @@
 
 .navMeni {
   display: flex;
-  background-color: aquamarine;
+  background-color: #22577A;
   height: 70px;
   margin-top: 0px;
   gap: 10px;
@@ -37,60 +37,40 @@ a {
   gap: 15px;
 }
 
-.kontejnerKorisnici {
+.kontejner {
   display: flex;
+  justify-content: center;
   gap: 25px;
+  margin-top: 25px;
   flex-wrap: wrap;
 }
 
-.karticaKorisnik {
+.kartica {
   display: flex;
+  background-color: #57CC99;
+  min-width: 300px;
   flex-direction: column;
-  width: 200px;
   padding: 10px;
-  background-color: bisque;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
   gap: 10px;
   border: 2px solid black;
   border-radius: 10px;
   opacity: 50%;
 }
 
-.karticaKorisnik>div {
+.kartica>div {
   display: flex;
   gap: 20px;
 }
 
-.karticaKarton {
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-  padding: 10px;
-  background-color: bisque;
-  gap: 10px;
-  border: 2px solid black;
-  border-radius: 10px;
-  opacity: 50%;
+.kartica>div>label {
+  min-width: 150px;
 }
 
-.kontejnerPregledi {
-  display: flex;
-  gap: 25px;
-  flex-wrap: wrap;
+.kartica>div>label:first-child {
+  text-align: right;
 }
 
-.karticaPregled {
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-  padding: 10px;
-  background-color: bisque;
-  gap: 10px;
-  border: 2px solid black;
-  border-radius: 10px;
-  opacity: 50%;
-}
-
-.karticaPregled>div {
-  display: flex;
-  gap: 20px;
+.kartica>div>label:last-child {
+  text-align: left;
 }

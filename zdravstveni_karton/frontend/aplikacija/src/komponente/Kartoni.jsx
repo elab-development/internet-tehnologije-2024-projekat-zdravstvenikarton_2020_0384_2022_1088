@@ -1,9 +1,14 @@
 import React from 'react'
+import Karton from './Karton'
 
-const Kartoni = () => {
+const Kartoni = ({kartoni}) => {
   return (
-    <div>
-      
+    <div className='kontejner'>
+      {
+        kartoni.map((k) => {
+        return <Karton zk={k}/>
+      })
+      }    
     </div>
   )
 }
