@@ -1,81 +1,94 @@
 import './App.css';
 import NavMeni from './komponente/NavMeni';
 import Korisnici from './komponente/Korisnici';
-import Pocetna from './komponente/Pocetna';
-import { BrowserRouter, Routes, Route, NavLink, useLocation } from "react-router-dom";
+import Prijava from './komponente/Prijava';
 import Pregledi from './komponente/Pregledi';
 import Kartoni from './komponente/Kartoni';
+import Korisnik from './komponente/Korisnik';
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { useState } from 'react';
+
 
 const korisnici = [
   {
     jmbg: "0101990123456",
     ime: "Marko",
     prezime: "Marković",
-    username: "marko123",
-    uloga: "lekar"
+    email: "marko123@gmail.com",
+    uloga: "lekar",
+    lozinka: "mk1234ab"
   },
   {
     jmbg: "1203996789123",
     ime: "Ana",
     prezime: "Petrović",
-    username: "ana_p",
-    uloga: "lekar"
+    email: "ana.p@gmail.com",
+    uloga: "lekar",
+    lozinka: "ap5678cd"
   },
   {
     jmbg: "2505983456123",
     ime: "Nikola",
     prezime: "Medić",
-    username: "nikola_med",
-    uloga: "lekar"
+    email: "nikola.med@gmail.com",
+    uloga: "lekar",
+    lozinka: "nm9012ef"
   },
   {
     jmbg: "1502957890123",
     ime: "Jovana",
     prezime: "Jović",
-    username: "jovana77",
-    uloga: "med_osoblje"
+    email: "jovana77@gmail.com",
+    uloga: "med_osoblje",
+    lozinka: "jj3456gh"
   },
   {
     jmbg: "3004884567891",
     ime: "Dragan",
     prezime: "Đurić",
-    username: "dragan_d",
-    uloga: "med_osoblje"
+    email: "dragan.d@gmail.com",
+    uloga: "med_osoblje",
+    lozinka: "dd7890ij"
   },
   {
     jmbg: "0407991234567",
     ime: "Ivana",
     prezime: "Simić",
-    username: "ivana_s",
-    uloga: "med_osoblje"
+    email: "ivana.s@gmail.com",
+    uloga: "med_osoblje",
+    lozinka: "is1122kl"
   },
   {
     jmbg: "2801969876543",
     ime: "Petar",
     prezime: "Petrović",
-    username: "petarx",
-    uloga: "pacijent"
+    email: "petarx@gmail.com",
+    uloga: "pacijent",
+    lozinka: "pp3344mn"
   },
   {
     jmbg: "1704926543210",
     ime: "Mila",
     prezime: "Milić",
-    username: "mila88",
-    uloga: "pacijent"
+    email: "mila88@gmail.com",
+    uloga: "pacijent",
+    lozinka: "mm5566op"
   },
   {
     jmbg: "0905014567890",
     ime: "Vuk",
     prezime: "Vukić",
-    username: "vuk_v",
-    uloga: "pacijent"
+    email: "vuk.v@gmail.com",
+    uloga: "pacijent",
+    lozinka: "vv7788qr"
   },
   {
     jmbg: "2212017896543",
     ime: "Sofija",
     prezime: "Sofronić",
-    username: "sofija",
-    uloga: "pacijent"
+    email: "sofija@gmail.com",
+    uloga: "pacijent",
+    lozinka: "ss9900tu"
   }
 ];
 
@@ -277,19 +290,56 @@ const kartoni = [
 
 
 function App() {
-  const lokacija = useLocation(); // mora biti const
+
+  const [prijavljen, setPrijavljen] = useState(0);
+  const navigate = useNavigate();
+  const lokacija = useLocation();
+  const[prijavljenKorisnik, setPrijavljenKorisnik] = useState();
+
+  function prijava() {
+    const inpMejl = document.querySelector('#mejl');
+    const inpLozinka = document.querySelector('#lozinka');
+
+    const korisnik = korisnici.find(
+      k => k.email === inpMejl.value && k.lozinka === inpLozinka.value
+    );
+
+    if (korisnik) {
+      setPrijavljen(1);
+      setPrijavljenKorisnik(korisnik);
+      navigate("/pregledi");  // nakon uspešne prijave
+    } else {
+      console.log("KREDENCIJALI NISU TAČNI !");
+    }
+  }
+
 
   return (
     <div className="App">
-      {lokacija.pathname === "/" ? null : <NavMeni />}
+      {/* Prikaz NavMeni-a osim na početnoj */}
+      {lokacija.pathname !== "/" && prijavljen === 1 ? <NavMeni/> : null}
+
       <Routes>
-        <Route path="/" element={<Pocetna />} />
-        <Route path="/pregledi" element={<Pregledi pregledi={pregledi} />} />
-        <Route path="/korisnici" element={<Korisnici korisnici={korisnici} />} />
-        <Route path="/kartoni" element={<Kartoni kartoni={kartoni} />} />
+        {/* Početna ruta */}
+        <Route path="/" element={<Prijava prijava={prijava} prijavljen={prijavljen} />} />
+
+        {/* Ostale rute dostupne samo ako je korisnik prijavljen */}
+        {prijavljen === 1 && (
+          <>
+            <Route path="/pregledi" element={<Pregledi pregledi={pregledi} />} />
+            <Route path="/korisnici" element={<Korisnici korisnici={korisnici} />} />
+            <Route path="/kartoni" element={<Kartoni kartoni={kartoni} />} />
+            <Route path="/moji-podaci" element={<Korisnik korisnik={prijavljenKorisnik}/>} />
+
+          </>
+        )}
+        {/* Not Found ruta */}
+        <Route path="*" element={<h2>Stranica nije pronađena (404)</h2>} />
+
       </Routes>
     </div>
   );
 }
+
 
 export default App;

@@ -1,16 +1,20 @@
-import React from 'react'
-import Korisnik from './Korisnik'
+import React from "react";
+import Korisnik from "./Korisnik";
 
-function Korisnici({korisnici}) {
+function Korisnici({ korisnici }) {
   return (
-    <div className='kontejner'>
-      {korisnici.map((k) => {
-        return (
-            <Korisnik korisnik={k}/>
-        )
-      })}
-    </div>
-  )
+    <>
+      <h3 style={{ marginBottom: "50" + "px", marginTop: "50" + "px" }}>
+        SVI KORISNICI
+      </h3>
+
+      <div className="kontejner">
+        {korisnici.map((k) => {
+          return <Korisnik korisnik={k} />;
+        })}
+      </div>
+    </>
+  );
 }
 
-export default Korisnici
+export default Korisnici;

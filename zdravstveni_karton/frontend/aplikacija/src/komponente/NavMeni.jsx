@@ -1,20 +1,17 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function NavMeni() {
   return (
     <div className="navMeni">
-      <a> Moji pregledi </a>
-      <a> Obavljenje pregleda </a>
-      <a> Moji pacijenti </a>
 
-      <a> Ubaci pacijent u red </a>
-      <a> Moji pacijenti </a>
-      <a> Red čekanja </a>
-      <a> Kreiraj karton</a>
-      <a> Izbaci iz reda </a>
-
-      <a>Moji podaci</a>
-      <a>Moji pregledi</a>
+      <Link to="/pregledi"> Moji pregledi </Link>
+      <Link to="/korisnici"> Moji pacijenti </Link>
+      <Link to="/kartoni"> Moji karton/i </Link>
+      <Link> Red čekanja </Link>
+      <Link to="/moji-podaci"> Moji podaci </Link>
+      <Link> Obavljenje pregleda </Link>
+      
     </div>
   );
 }
