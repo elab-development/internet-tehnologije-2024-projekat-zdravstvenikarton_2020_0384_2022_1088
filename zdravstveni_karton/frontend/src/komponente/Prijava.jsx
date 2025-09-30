@@ -9,42 +9,22 @@ export default function Prijava({ prijava }) {
        
         <form className="formaPrijava">
           <input type="email" required id="mejl" placeholder="Mejl"></input>
-          <input
-            type="password"
-            required
-            id="lozinka"
-            placeholder="Lozinka"
-          ></input>
+          <input type="password" required id="lozinka" placeholder="Lozinka"></input>
 
-          <div>
-            {" "}
-            <input type="radio" id="lekar" name="uloga" value="lekar" />{" "}
-            <label for="lekar"> lekar</label>{" "}
+          <div>  
+            <input type="radio" id="lekar" name="uloga" value="lekar" />
+            <label for="lekar"> lekar</label>
           </div>
           <div>
-            {" "}
-            <input
-              type="radio"
-              id="med_osoblje"
-              name="uloga "
-              value="med_osoblje"
-            />{" "}
-            <label for="med_osoblje"> medicinsko osoblje</label>{" "}
+            <input type="radio" id="med_osoblje" name="uloga" value="med_osoblje"/>
+            <label for="med_osoblje"> medicinsko osoblje</label>
           </div>
           <div>
-            {" "}
-            <input
-              type="radio"
-              id="pacijent"
-              name="uloga"
-              value="pacijent"
-            />{" "}
-            <label for="pacijent"> pacijent</label>{" "}
+            <input type="radio" id="pacijent" name="uloga" value="pacijent"/>
+            <label for="pacijent"> pacijent</label>
           </div>
 
-          <button type="button" onClick={prijava}>
-            Prijavite se
-          </button>
+          <button type="button" onClick={prijava}>Prijavite se</button>
         </form>
       </div>
     </div>

@@ -300,23 +300,39 @@ function App() {
   const [prijavljen, setPrijavljen] = useState(0);
   const navigate = useNavigate();
   const lokacija = useLocation();
-  const[prijavljenKorisnik, setPrijavljenKorisnik] = useState();
+  const [prijavljenKorisnik, setPrijavljenKorisnik] = useState();
+  const [uloga, setUloga] = useState(null);
 
   function prijava() {
     const inpMejl = document.querySelector('#mejl');
     const inpLozinka = document.querySelector('#lozinka');
+    const inpUloga = document.querySelector('input[name="uloga"]:checked');
 
-    let korisnik = lekari.find(
-      k => k.email === inpMejl.value && k.lozinka === inpLozinka.value
-    );
-
-    korisnik = pacijenti.find(
-      k => k.email === inpMejl.value && k.lozinka === inpLozinka.value
-    );
-
-    korisnik = med_osoblje.find(
-      k => k.email === inpMejl.value && k.lozinka === inpLozinka.value
-    );
+    setUloga(inpUloga.value);
+    let korisnik = null;
+    
+    if(inpUloga.value === "lekar") {
+      for(let l of lekari) {
+        if(l.email === inpMejl.value && l.lozinka === inpLozinka.value) {
+          korisnik = l;
+          break;
+        }
+      }
+    } else if(inpUloga.value === "pacijent") {
+      for(let p of pacijenti) {
+        if(p.email === inpMejl.value && p.lozinka === inpLozinka.value) {
+          korisnik = p;
+          break;
+        }
+      }
+    } else if(inpUloga.value === "med_osoblje") {
+      for(let mo of med_osoblje) {
+        if(mo.email === inpMejl.value && mo.lozinka === inpLozinka.value) {
+          korisnik = mo;
+          break;
+        }
+      }
+    }
     
     if (korisnik) {
       setPrijavljen(1);
@@ -327,11 +343,15 @@ function App() {
     }
   }
 
+  /* Prikaz NavMeni-a osim na početnoj */
+  let meni = null;
+  if(prijavljen === 1 && lokacija.pathname !== "/") {
+    meni = <NavMeni/>;
+  }
 
   return (
     <div className="App">
-      {/* Prikaz NavMeni-a osim na početnoj */}
-      {lokacija.pathname !== "/" && prijavljen === 1 ? <NavMeni/> : null}
+      {meni}
 
       <Routes>
         {/* Početna ruta */}
@@ -340,7 +360,7 @@ function App() {
         {/* Ostale rute dostupne samo ako je korisnik prijavljen */}
         {prijavljen === 1 && (
           <>
-            <Route path="/pregledi" element={<Pregledi pregledi={pregledi} prijavljen={prijavljenKorisnik} />} />
+            <Route path="/pregledi" element={<Pregledi pregledi={pregledi} prijavljen={prijavljenKorisnik} uloga={uloga} />} />
             <Route path="/pacijenti" element={<Korisnici pacijenti={pacijenti} prijavljen={prijavljenKorisnik} />} />
             <Route path="/kartoni" element={<Kartoni kartoni={kartoni} />} />
             <Route path="/moji-podaci" element={<Korisnik korisnik={prijavljenKorisnik}/>} />
@@ -354,6 +374,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;
