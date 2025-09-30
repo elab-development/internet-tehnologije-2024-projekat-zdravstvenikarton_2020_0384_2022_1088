@@ -40,7 +40,7 @@ a:hover {
   margin-top: 100px;
   background-color: #38A3A5;
   width: 300px;
-  height: 300px;
+  height: 400px;
   padding: 30px;
 }
 
@@ -65,6 +65,17 @@ a:hover {
 
 .formaPrijava > button:hover {
   background-color: #80ED99;
+}
+
+.formaPrijava > div{
+  display: flex;
+  align-items: left;
+}
+
+.formaPrijava > div > input{
+  height: 20px;
+  width:20px;
+  border-radius: 0;
 }
 
 .kontejner {
