@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-ro
 import { useState } from 'react';
 
 
-const korisnici = [
+const lekari = [
   {
     jmbg: "0101990123456",
     ime: "Marko",
@@ -33,7 +33,10 @@ const korisnici = [
     email: "nikola.med@gmail.com",
     uloga: "lekar",
     lozinka: "nm9012ef"
-  },
+  }
+];
+
+const med_osoblje = [
   {
     jmbg: "1502957890123",
     ime: "Jovana",
@@ -57,7 +60,10 @@ const korisnici = [
     email: "ivana.s@gmail.com",
     uloga: "med_osoblje",
     lozinka: "is1122kl"
-  },
+  }
+];
+
+const pacijenti = [
   {
     jmbg: "2801969876543",
     ime: "Petar",
@@ -100,7 +106,7 @@ const pregledi = [
     dijagnoza: "Grip",
     terapija: "Amoksicilin",
     pacijent: "Petar Petrović",
-    lekar: "Dr. Marko Marković",
+    lekar: "Marko Marković",
     medicinskoOsoblje: "Jovana Jović",
   },
   {
@@ -110,7 +116,7 @@ const pregledi = [
     dijagnoza: "/",
     terapija: "/",
     pacijent: "Petar Petrović",
-    lekar: "Dr. Ana Petrović",
+    lekar: "Ana Petrović",
     medicinskoOsoblje: "Jovana Jović",
   },
   {
@@ -120,7 +126,7 @@ const pregledi = [
     dijagnoza: "/",
     terapija: "/",
     pacijent: "Mila Milić",
-    lekar: "Dr. Ana Petrović",
+    lekar: "Ana Petrović",
     medicinskoOsoblje: "Dragan Đurić",
   },
   {
@@ -130,7 +136,7 @@ const pregledi = [
     dijagnoza: "Alergija",
     terapija: "Antihistaminici",
     pacijent: "Vuk Vukić",
-    lekar: "Dr. Nikola Medić",
+    lekar: "Nikola Medić",
     medicinskoOsoblje: "Ivana Simić",
   },
   {
@@ -140,7 +146,7 @@ const pregledi = [
     dijagnoza: "/",
     terapija: "/",
     pacijent: "Sofija Sofronić",
-    lekar: "Dr. Marko Marković",
+    lekar: "Marko Marković",
     medicinskoOsoblje: "Jovan Jović",
   },
   {
@@ -150,7 +156,7 @@ const pregledi = [
     dijagnoza: "/",
     terapija: "/",
     pacijent: "Petar Petrović",
-    lekar: "Dr. Ana Petrović",
+    lekar: "Ana Petrović",
     medicinskoOsoblje: "Dragan Đurić",
   },
   {
@@ -160,7 +166,7 @@ const pregledi = [
     dijagnoza: "Upala grla",
     terapija: "Antibiotici",
     pacijent: "Mila Milić",
-    lekar: "Dr. Nikola Medić",
+    lekar: "Nikola Medić",
     medicinskoOsoblje: "Dragan Đurić",
   },
   {
@@ -170,7 +176,7 @@ const pregledi = [
     dijagnoza: "/",
     terapija: "/",
     pacijent: "Vuk Vukić",
-    lekar: "Dr. Nikola Medić",
+    lekar: "Nikola Medić",
     medicinskoOsoblje: "Ivana Simić",
   },
   {
@@ -180,7 +186,7 @@ const pregledi = [
     dijagnoza: "/",
     terapija: "/",
     pacijent: "Sofija Sofronić",
-    lekar: "Dr. Ana Petrović",
+    lekar: "Ana Petrović",
     medicinskoOsoblje: "Jovana Jović",
   },
   {
@@ -190,7 +196,7 @@ const pregledi = [
     dijagnoza: "Dijabetes",
     terapija: "Insulin",
     pacijent: "Vuk Vukić",
-    lekar: "Dr. Marko Marković",
+    lekar: "Marko Marković",
     medicinskoOsoblje: "Jovana Jović",
   }
 ];
@@ -300,10 +306,18 @@ function App() {
     const inpMejl = document.querySelector('#mejl');
     const inpLozinka = document.querySelector('#lozinka');
 
-    const korisnik = korisnici.find(
+    let korisnik = lekari.find(
       k => k.email === inpMejl.value && k.lozinka === inpLozinka.value
     );
 
+    korisnik = pacijenti.find(
+      k => k.email === inpMejl.value && k.lozinka === inpLozinka.value
+    );
+
+    korisnik = med_osoblje.find(
+      k => k.email === inpMejl.value && k.lozinka === inpLozinka.value
+    );
+    
     if (korisnik) {
       setPrijavljen(1);
       setPrijavljenKorisnik(korisnik);
@@ -326,8 +340,8 @@ function App() {
         {/* Ostale rute dostupne samo ako je korisnik prijavljen */}
         {prijavljen === 1 && (
           <>
-            <Route path="/pregledi" element={<Pregledi pregledi={pregledi} />} />
-            <Route path="/korisnici" element={<Korisnici korisnici={korisnici} />} />
+            <Route path="/pregledi" element={<Pregledi pregledi={pregledi} prijavljen={prijavljenKorisnik} />} />
+            <Route path="/pacijenti" element={<Korisnici pacijenti={pacijenti} prijavljen={prijavljenKorisnik} />} />
             <Route path="/kartoni" element={<Kartoni kartoni={kartoni} />} />
             <Route path="/moji-podaci" element={<Korisnik korisnik={prijavljenKorisnik}/>} />
 

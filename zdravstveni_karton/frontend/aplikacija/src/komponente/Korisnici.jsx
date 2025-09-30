@@ -1,7 +1,7 @@
 import React from "react";
 import Korisnik from "./Korisnik";
 
-function Korisnici({ korisnici }) {
+function Korisnici({ korisnici, prijavljen }) {
   return (
     <>
       <h3 style={{ marginBottom: "50" + "px", marginTop: "50" + "px" }}>
@@ -10,7 +10,9 @@ function Korisnici({ korisnici }) {
 
       <div className="kontejner">
         {korisnici.map((k) => {
-          return <Korisnik korisnik={k} />;
+          if((k.ime + " " + k.prezime) === (prijavljen.ime + " " + prijavljen.prezime)) {
+            return <Korisnik korisnik={k} />;
+          }
         })}
       </div>
     </>

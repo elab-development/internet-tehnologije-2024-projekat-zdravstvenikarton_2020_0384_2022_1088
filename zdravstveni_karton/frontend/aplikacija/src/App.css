@@ -22,19 +22,26 @@ a:hover {
   color: black;
 }
 
-.pocetna {
+.prijava {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   /* cela visina browser-a */
   align-items: center;
-  background: linear-gradient(45deg, rgba(58, 90, 64, 1) 0%, rgba(218, 215, 205, 1) 50%);
+  background-image: url('slika.jpg');
+  background-size: cover;
+  background-position: center;
 }
 
-.teloPocetne {
+.teloPrijava {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-top: 100px;
+  background-color: #38A3A5;
+  width: 300px;
+  height: 300px;
+  padding: 30px;
 }
 
 .formaPrijava {
@@ -42,6 +49,22 @@ a:hover {
   flex-direction: column;
   width: 200px;
   gap: 15px;
+}
+
+.formaPrijava > input {
+  border: none;
+  height: 20px;
+}
+
+.formaPrijava > button {
+  height: 25px;
+  background-color: white;
+  border: none;
+  height: 30px;
+}
+
+.formaPrijava > button:hover {
+  background-color: #80ED99;
 }
 
 .kontejner {
