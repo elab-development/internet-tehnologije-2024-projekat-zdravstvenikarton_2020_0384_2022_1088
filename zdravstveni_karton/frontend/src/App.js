@@ -5,6 +5,7 @@ import Prijava from './komponente/Prijava';
 import Pregledi from './komponente/Pregledi';
 import Kartoni from './komponente/Kartoni';
 import Korisnik from './komponente/Korisnik';
+import RedCekanja from './komponente/RedCekanja';
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
@@ -243,60 +244,6 @@ const kartoni = [
     pacijent: "Sofija Sofronić",
     lekar: "Marko Marković",
     medicinskoOsoblje: "Jovana Jović",
-  },
-  {
-    id: 5,
-    status: "neaktivan",
-    poslednjaTerapija: "Vitamin C",
-    poslednjaDijagnoza: "Umor",
-    pacijent: "Petar Petrović",
-    lekar: "Ana Petrović",
-    medicinskoOsoblje: "Ivana Simić",
-  },
-  {
-    id: 6,
-    status: "aktivan",
-    poslednjaTerapija: "Antibiotik",
-    poslednjaDijagnoza: "Upala pluća",
-    pacijent: "Mila Milić",
-    lekar: "Nikola Medić",
-    medicinskoOsoblje: "Dragan Đurić",
-  },
-  {
-    id: 7,
-    status: "neaktivan",
-    poslednjaTerapija: "Kapi za nos",
-    poslednjaDijagnoza: "Sinusitis",
-    pacijent: "Vuk Vukić",
-    lekar: "Marko Marković",
-    medicinskoOsoblje: "Jovana Jović",
-  },
-  {
-    id: 8,
-    status: "aktivan",
-    poslednjaTerapija: "Magnezijum",
-    poslednjaDijagnoza: "Grčevi",
-    pacijent: "Sofija Sofronić",
-    lekar: "Ana Petrović",
-    medicinskoOsoblje: "Ivana Simić",
-  },
-  {
-    id: 9,
-    status: "neaktivan",
-    poslednjaTerapija: "Kortikosteroid",
-    poslednjaDijagnoza: "Alergija",
-    pacijent: "Petar Petrović",
-    lekar: "Nikola Medić",
-    medicinskoOsoblje: "Dragan Đurić",
-  },
-  {
-    id: 10,
-    status: "aktivan",
-    poslednjaTerapija: "Antiseptik",
-    poslednjaDijagnoza: "Posekotina",
-    pacijent: "Mila Milić",
-    lekar: "Marko Marković",
-    medicinskoOsoblje: "Jovana Jović",
   }
 ];
 
@@ -317,7 +264,6 @@ function App() {
     const inpLozinka = document.querySelector('#lozinka');
     const inpUloga = document.querySelector('input[name="uloga"]:checked');
 
-    setUloga(inpUloga.value);
     let korisnik = null;
 
     if (inpUloga.value === "lekar") {
@@ -346,10 +292,11 @@ function App() {
     if (korisnik) {
       setPrijavljen(1);
       setPrijavljenKorisnik(korisnik);
+      setUloga(inpUloga.value);
       navigate("/pregledi");  // nakon uspešne prijave
       console.log(korisnik);
     } else {
-      console.log("KREDENCIJALI NISU TAČNI !");
+      alert("KREDENCIJALI NISU TAČNI ILI NIJE IZABRANA DOBRA ULOGA!");
     }
   }
 
@@ -358,6 +305,7 @@ function App() {
   function odjava() {
     setPrijavljen(0);
     setPrijavljenKorisnik(null);
+    setUloga(null);
     navigate("/");
   }
 
@@ -365,7 +313,7 @@ function App() {
   /* Prikaz NavMeni-a osim na početnoj */
   let meni = null;
   if (prijavljen === 1 && lokacija.pathname !== "/") {
-    meni = <NavMeni odjava={odjava} />;
+    meni = <NavMeni odjava={odjava} uloga={uloga}/>;
   }
 
   return (
@@ -375,10 +323,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Prijava prijava={prijava} prijavljen={prijavljen} />} />
         <Route path="/pregledi" element={prijavljen === 1 ? <Pregledi pregledi={pregledi} prijavljen={prijavljenKorisnik} uloga={uloga} /> : <Prijava prijava={prijava} />} />
-        <Route path="/pacijenti" element={prijavljen === 1 ? <Korisnici pacijenti={pacijenti} prijavljen={prijavljenKorisnik} /> : <Prijava prijava={prijava} />} />
-        <Route path="/kartoni" element={prijavljen === 1 ? <Kartoni kartoni={kartoni} prijavljen={prijavljenKorisnik} /> : <Prijava prijava={prijava} />} />
+        <Route path="/pacijenti" element={prijavljen === 1 ? <Korisnici pacijenti={pacijenti} prijavljen={prijavljenKorisnik} uloga={uloga}/> : <Prijava prijava={prijava} />} />
+        <Route path="/kartoni" element={prijavljen === 1 ? <Kartoni kartoni={kartoni} prijavljen={prijavljenKorisnik} uloga={uloga}/> : <Prijava prijava={prijava} />} />
         <Route path="/moji-podaci" element={prijavljen === 1 ? <Korisnici prijavljen={prijavljenKorisnik} mojiP={1} /> : <Prijava prijava={prijava} />} />
-        <Route path="/red-čekanja" element={prijavljen === 1 ? <Pregledi pregledi={pregledi} prijavljen={prijavljenKorisnik} /> : <Prijava prijava={prijava} />} />
+        <Route path="/red-cekanja" element={prijavljen === 1 ? <RedCekanja pregledi={pregledi}/> : <Prijava prijava={prijava} />} />
         <Route path="*" element={<h2>Stranica nije pronađena (404)</h2>} />
       </Routes>
     </div>

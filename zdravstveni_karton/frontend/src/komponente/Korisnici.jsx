@@ -1,6 +1,6 @@
 import Korisnik from "./Korisnik";
 
-function Korisnici({ pacijenti, prijavljen, mojiP }) {
+function Korisnici({ pacijenti, prijavljen, mojiP, uloga}) {
   return (
     <>
       <h3 style={{ marginBottom: "50px", marginTop: "50px" }}>
