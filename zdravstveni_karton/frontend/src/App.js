@@ -258,7 +258,8 @@ function App() {
 
   /////////////////////////////////////////////////////////////
   //// FUNKCIJA ZA PRIJAVU
-  function prijava() {
+  function prijava(e) {
+    e.preventDefault();
     const inpMejl = document.querySelector('#mejl');
     const inpLozinka = document.querySelector('#lozinka');
     const inpUloga = document.querySelector('input[name="uloga"]:checked');
