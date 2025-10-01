@@ -8,6 +8,8 @@ import Korisnik from './komponente/Korisnik';
 import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+//// NIZOVI
 
 const lekari = [
   {
@@ -70,7 +72,8 @@ const pacijenti = [
     prezime: "Petrović",
     email: "petarx@gmail.com",
     uloga: "pacijent",
-    lozinka: "pp3344mn"
+    lozinka: "pp3344mn",
+    izabraniLekar: "Marko Marković"
   },
   {
     jmbg: "1704926543210",
@@ -78,7 +81,8 @@ const pacijenti = [
     prezime: "Milić",
     email: "mila88@gmail.com",
     uloga: "pacijent",
-    lozinka: "mm5566op"
+    lozinka: "mm5566op",
+    izabraniLekar: "Ana Petrović"
   },
   {
     jmbg: "0905014567890",
@@ -86,7 +90,8 @@ const pacijenti = [
     prezime: "Vukić",
     email: "vuk.v@gmail.com",
     uloga: "pacijent",
-    lozinka: "vv7788qr"
+    lozinka: "vv7788qr",
+    izabraniLekar: "Nikola Medić"
   },
   {
     jmbg: "2212017896543",
@@ -94,7 +99,8 @@ const pacijenti = [
     prezime: "Sofronić",
     email: "sofija@gmail.com",
     uloga: "pacijent",
-    lozinka: "ss9900tu"
+    lozinka: "ss9900tu",
+    izabraniLekar: "Marko Marković" // pošto ima više pacijenata nego lekara
   }
 ];
 
@@ -294,6 +300,7 @@ const kartoni = [
   }
 ];
 
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 function App() {
 
@@ -303,6 +310,8 @@ function App() {
   const [prijavljenKorisnik, setPrijavljenKorisnik] = useState();
   const [uloga, setUloga] = useState(null);
 
+  /////////////////////////////////////////////////////////////
+  //// FUNKCIJA ZA PRIJAVU
   function prijava() {
     const inpMejl = document.querySelector('#mejl');
     const inpLozinka = document.querySelector('#lozinka');
@@ -310,43 +319,53 @@ function App() {
 
     setUloga(inpUloga.value);
     let korisnik = null;
-    
-    if(inpUloga.value === "lekar") {
-      for(let l of lekari) {
-        if(l.email === inpMejl.value && l.lozinka === inpLozinka.value) {
+
+    if (inpUloga.value === "lekar") {
+      for (let l of lekari) {
+        if (l.email === inpMejl.value && l.lozinka === inpLozinka.value) {
           korisnik = l;
           break;
         }
       }
-    } else if(inpUloga.value === "pacijent") {
-      for(let p of pacijenti) {
-        if(p.email === inpMejl.value && p.lozinka === inpLozinka.value) {
+    } else if (inpUloga.value === "pacijent") {
+      for (let p of pacijenti) {
+        if (p.email === inpMejl.value && p.lozinka === inpLozinka.value) {
           korisnik = p;
           break;
         }
       }
-    } else if(inpUloga.value === "med_osoblje") {
-      for(let mo of med_osoblje) {
-        if(mo.email === inpMejl.value && mo.lozinka === inpLozinka.value) {
+    } else if (inpUloga.value === "med_osoblje") {
+      for (let mo of med_osoblje) {
+        if (mo.email === inpMejl.value && mo.lozinka === inpLozinka.value) {
           korisnik = mo;
           break;
         }
       }
     }
-    
+
     if (korisnik) {
       setPrijavljen(1);
       setPrijavljenKorisnik(korisnik);
       navigate("/pregledi");  // nakon uspešne prijave
+      console.log(korisnik);
     } else {
       console.log("KREDENCIJALI NISU TAČNI !");
     }
   }
 
+  /////////////////////////////////////////////////////////////
+  //// FUNKCIJA ZA ODJAVU
+  function odjava() {
+    setPrijavljen(0);
+    setPrijavljenKorisnik(null);
+    navigate("/");
+  }
+
+
   /* Prikaz NavMeni-a osim na početnoj */
   let meni = null;
-  if(prijavljen === 1 && lokacija.pathname !== "/") {
-    meni = <NavMeni/>;
+  if (prijavljen === 1 && lokacija.pathname !== "/") {
+    meni = <NavMeni odjava={odjava} />;
   }
 
   return (
@@ -354,22 +373,13 @@ function App() {
       {meni}
 
       <Routes>
-        {/* Početna ruta */}
         <Route path="/" element={<Prijava prijava={prijava} prijavljen={prijavljen} />} />
-
-        {/* Ostale rute dostupne samo ako je korisnik prijavljen */}
-        {prijavljen === 1 && (
-          <>
-            <Route path="/pregledi" element={<Pregledi pregledi={pregledi} prijavljen={prijavljenKorisnik} uloga={uloga} />} />
-            <Route path="/pacijenti" element={<Korisnici pacijenti={pacijenti} prijavljen={prijavljenKorisnik} />} />
-            <Route path="/kartoni" element={<Kartoni kartoni={kartoni} />} />
-            <Route path="/moji-podaci" element={<Korisnik korisnik={prijavljenKorisnik}/>} />
-
-          </>
-        )}
-        {/* Not Found ruta */}
+        <Route path="/pregledi" element={prijavljen === 1 ? <Pregledi pregledi={pregledi} prijavljen={prijavljenKorisnik} uloga={uloga} /> : <Prijava prijava={prijava} />} />
+        <Route path="/pacijenti" element={prijavljen === 1 ? <Korisnici pacijenti={pacijenti} prijavljen={prijavljenKorisnik} /> : <Prijava prijava={prijava} />} />
+        <Route path="/kartoni" element={prijavljen === 1 ? <Kartoni kartoni={kartoni} prijavljen={prijavljenKorisnik} /> : <Prijava prijava={prijava} />} />
+        <Route path="/moji-podaci" element={prijavljen === 1 ? <Korisnici prijavljen={prijavljenKorisnik} mojiP={1} /> : <Prijava prijava={prijava} />} />
+        <Route path="/red-čekanja" element={prijavljen === 1 ? <Pregledi pregledi={pregledi} prijavljen={prijavljenKorisnik} /> : <Prijava prijava={prijava} />} />
         <Route path="*" element={<h2>Stranica nije pronađena (404)</h2>} />
-
       </Routes>
     </div>
   );

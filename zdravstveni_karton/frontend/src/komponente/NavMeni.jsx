@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function NavMeni() {
+function NavMeni({odjava}) {
   return (
     <div className="navMeni">
 
@@ -10,7 +10,8 @@ function NavMeni() {
       <Link to="/kartoni"> Moji karton/i </Link>
       <Link> Red čekanja </Link>
       <Link to="/moji-podaci"> Moji podaci </Link>
-      <Link> Obavljenje pregleda </Link>
+      <button  onClick={odjava}> Odjavi se</button>
+
       
     </div>
   );

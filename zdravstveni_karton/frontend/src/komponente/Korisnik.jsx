@@ -1,8 +1,7 @@
-import React from "react";
 
-export default function Korisnik({korisnik}) {
+export default function Korisnik({korisnik, mojiP}) {
   return (
-    <div className="kartica">
+    <div className= "kartica">
      <div> <label> JMBG: </label>  <label>{korisnik.jmbg} </label> </div>
      <div> <label> Ime: </label>  <label>{korisnik.ime} </label> </div>
      <div> <label> Prezime: </label>  <label>{korisnik.prezime} </label> </div>
