@@ -1,10 +1,13 @@
-import React from "react";
+import logo from '../logoIme.png';
 
 export default function Prijava({ prijava }) {
   return (
     <div className="prijava">
+
+    <img src={logo} id="logo"></img>
+
       <div className="teloPrijava">
-        <h3>Technomedic</h3>
+        <h3>PRIJAVA</h3>
         <p> Dobro došli !</p>
        
         <form className="formaPrijava">
@@ -23,7 +26,7 @@ export default function Prijava({ prijava }) {
             <input type="radio" id="pacijent" name="uloga" value="pacijent"/>
             <label for="pacijent"> pacijent</label>
           </div>
-
+            <br></br>
           <button type="button" onClick={prijava}>Prijavite se</button>
         </form>
       </div>

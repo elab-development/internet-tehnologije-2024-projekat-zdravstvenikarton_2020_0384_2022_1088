@@ -4,9 +4,8 @@ import Korisnici from './komponente/Korisnici';
 import Prijava from './komponente/Prijava';
 import Pregledi from './komponente/Pregledi';
 import Kartoni from './komponente/Kartoni';
-import Korisnik from './komponente/Korisnik';
 import RedCekanja from './komponente/RedCekanja';
-import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import {  Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
