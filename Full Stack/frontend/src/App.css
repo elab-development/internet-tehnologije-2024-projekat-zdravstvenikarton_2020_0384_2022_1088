@@ -1,0 +1,149 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+}
+
+.App {
+  text-align: center;
+}
+
+.navMeni {
+  display: flex;
+  background-color: #22577A;
+  height: 70px;
+  margin-top: 0px;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.navMeni>a {
+  color: white;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.navMeni>button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: white;
+  margin-left: auto;
+}
+
+.navMeni>button:hover{
+  color: red;
+}
+
+a:hover {
+  color: black;
+}
+
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+/* PRIJAVA */
+
+.prijava {
+  display: flex;
+  flex-direction: row;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-image: url('pozadina.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.teloPrijava {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(87, 204, 153, 0.5);
+  width: 300px;
+  height: 400px;
+  padding: 30px;
+  opacity:80%;
+}
+
+.formaPrijava {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  gap: 10px;
+}
+
+.formaPrijava>input {
+  border: none;
+  height: 20px;
+}
+
+.formaPrijava>button {
+  height: 25px;
+  background-color: white;
+  border: none;
+  height: 30px;
+}
+
+.formaPrijava>button:hover {
+  background-color: #80ED99;
+}
+
+.formaPrijava>div {
+  display: flex;
+  align-items: left;
+}
+
+.formaPrijava>div>input {
+  height: 20px;
+  width: 20px;
+  border-radius: 0;
+}
+
+#logo {
+  width: 400px;
+  height: auto;
+}
+
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.kontejner {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-top: 25px;
+  flex-wrap: wrap;
+}
+
+.kartica {
+  display: flex;
+  background-color: #C7F9CC;
+  min-width: 340px;
+  max-width: 340px;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: 0 12px 10px rgba(0, 0, 0, 0.35);
+  gap: 10px;
+  border: 1px solid #57CC99;
+  border-radius: 10px;
+}
+
+.kartica>div {
+  display: flex;
+  gap: 20px;
+}
+
+.kartica>div>label {
+  min-width: 150px;
+}
+
+.kartica>div>label:first-child {
+  text-align: right;
+}
+
+.kartica>div>label:last-child {
+  text-align: left;
+}

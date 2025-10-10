@@ -1,0 +1,10 @@
+<?php
+
+namespace App\Enums;
+
+enum Uloge: string
+{
+    case Lekar = 'lekar';
+    case medOsoblje = 'med_osoblje';
+    case Pacijent = 'pacijent';
+}
