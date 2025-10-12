@@ -22,7 +22,7 @@ class AuthController extends Controller
         $user->tokens()->delete();
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['message' => 'ZDRAVO ' . $user->username . ', DOBRO DOŠLI NAZAD', 'access_token' => $token, 'token_type' => 'Bearer']);
+        return response()->json(['message' => 'USPEŠNO LOGOVANJE', 'user' => $user, 'access_token' => $token, 'token_type' => 'Bearer']);
     }
 
     // Funkcija za registraciju na sistem
@@ -59,7 +59,10 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['USPEŠNA REGISTRACIJA', 'podaci' => $user, 'access_token' => $token, 'token_type' => 'Bearer',]);
+        return response()->json(['USPEŠNA REGISTRACIJA', 
+        'podaci' => $user, 
+        'access_token' => $token, 
+        'token_type' => 'Bearer',]);
     }
     // Funkcija za odjavu sa sistema
     public function logout(Request $request)

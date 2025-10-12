@@ -47,7 +47,7 @@ a:hover {
 /*////////////////////////////////////////////////////////////////////////////////////////////*/
 /* PRIJAVA */
 
-.prijava {
+.telo {
   display: flex;
   flex-direction: row;
   min-height: 100vh;
@@ -58,46 +58,46 @@ a:hover {
   background-position: center;
 }
 
-.teloPrijava {
+.kontejnerForme {
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: rgba(87, 204, 153, 0.5);
   width: 300px;
-  height: 400px;
+  height: auto;
   padding: 30px;
   opacity:80%;
 }
 
-.formaPrijava {
+.forma {
   display: flex;
   flex-direction: column;
   width: 200px;
   gap: 10px;
 }
 
-.formaPrijava>input {
+.forma>input {
   border: none;
   height: 20px;
 }
 
-.formaPrijava>button {
+.forma>button {
   height: 25px;
   background-color: white;
   border: none;
   height: 30px;
 }
 
-.formaPrijava>button:hover {
+.forma>button:hover {
   background-color: #80ED99;
 }
 
-.formaPrijava>div {
+.forma>div {
   display: flex;
   align-items: left;
 }
 
-.formaPrijava>div>input {
+.forma>div>input {
   height: 20px;
   width: 20px;
   border-radius: 0;
@@ -106,6 +106,14 @@ a:hover {
 #logo {
   width: 400px;
   height: auto;
+}
+.kontejnerForme>a{
+  text-decoration: none;
+  color: white;
+  margin-top: 15px;
+}
+.kontejnerForme>a:hover{
+  color: black;
 }
 
 /*////////////////////////////////////////////////////////////////////////////////////////////*/
