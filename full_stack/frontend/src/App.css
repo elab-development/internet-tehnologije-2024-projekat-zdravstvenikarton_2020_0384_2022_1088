@@ -155,3 +155,7 @@ a:hover {
 .kartica>div>label:last-child {
   text-align: left;
 }
+
+span.licniPodaci {
+  color: #80ED99;
+}

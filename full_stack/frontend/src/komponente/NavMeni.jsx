@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function NavMeni({odjava, uloga}) {
+function NavMeni({odjava, korisnik}) {
 
-  if(uloga === "lekar") {
+  if(korisnik.uloga === "lekar") {
     return(
       <div className="navMeni">
 
@@ -13,19 +13,20 @@ function NavMeni({odjava, uloga}) {
       <Link to="/red-cekanja"> Red čekanja </Link>
       <Link to="/moji-podaci"> Moji podaci </Link>
       <button onClick={odjava}> Odjavi se</button>
-    
+      <span className="licniPodaci">{korisnik.uloga}: {korisnik.ime} {korisnik.prezime}</span>
     </div>
     );
-  } else if(uloga === "pacijent") {
+  } else if(korisnik.uloga === "pacijent") {
     return(
       <div className="navMeni">
         <Link to="/pregledi"> Moji pregledi </Link>
         <Link to="/kartoni"> Moj karton </Link>
         <Link to="/moji-podaci"> Moji podaci </Link>
         <button onClick={odjava}> Odjavi se</button>
+        <span className="licniPodaci">{korisnik.uloga}: {korisnik.ime} {korisnik.prezime}</span>
       </div>
     );
-  } else if(uloga === "med_osoblje") {
+  } else if(korisnik.uloga === "med_osoblje") {
     return(
       <div className="navMeni">
         <Link to="/pregledi"> Moji pregledi </Link>
@@ -33,6 +34,8 @@ function NavMeni({odjava, uloga}) {
         <Link to="red-cekanja"> Red čekanja </Link>
         <Link to="/moji-podaci"> Moji podaci </Link>
         <button  onClick={odjava}> Odjavi se</button>
+        <span className="licniPodaci">{korisnik.uloga}: {korisnik.ime} {korisnik.prezime}</span>
+
     </div>
     );
   }

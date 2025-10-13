@@ -1,17 +1,10 @@
 import React from 'react'
 import Pregled from './Pregled';
 
-function Pregledi({pregledi, prijavljen, uloga}) {
+function Pregledi({prijavljen, prikazPregleda, pregledi}) {
 
-  let preglediZaPrikaz = [];
-
-  if(uloga === 'lekar') {
-    preglediZaPrikaz = pregledi.filter(p => p.lekar === prijavljen.ime + " " + prijavljen.prezime);
-  } else if(uloga === 'pacijent') {
-    preglediZaPrikaz = pregledi.filter(p => p.pacijent === prijavljen.ime + " " + prijavljen.prezime);
-  } else if(uloga === 'med_osoblje') {
-    preglediZaPrikaz = pregledi.filter(p => p.medicinskoOsoblje === prijavljen.ime + " " + prijavljen.prezime);
-  }
+  prikazPregleda();
+  let preglediZaPrikaz = pregledi;
 
   return (
     <>
