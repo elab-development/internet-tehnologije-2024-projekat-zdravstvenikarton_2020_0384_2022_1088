@@ -82,6 +82,6 @@ class AuthController extends Controller
     public function myAccount()
     {
         $user = Auth::user();
-        return response()->json(['poruka' => "PRIJAVLJENI KORISNIK", 'korisnik' => new KorisnikResource($user)]);
+        return response()->json(['poruka' => "PRIJAVLJENI KORISNIK", 'korisnik' => new  KorisnikResource($user)]);
     }
 }
