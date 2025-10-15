@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Resources\KorisnikResource;
 use App\Models\Pregled;
 use App\Models\User;
+use App\Http\Resources\PregledResource;
 
 class LekarController extends Controller
 {
@@ -21,8 +22,8 @@ class LekarController extends Controller
         if ($pregledi->count() == 0) {
             return response()->json("NEMA PREGLEDA ZA TRAŽENOG LEKARA");
         }
-        return response()->json($pregledi);
-    }
+        return PregledResource::collection($pregledi);
+        }
 
     // Funkcija vraća sve pacijente za traženog lekara
     public function pacijenti($id)
@@ -46,6 +47,6 @@ class LekarController extends Controller
             return response()->json("LEKAR NEMA PREGLEDANIH PACIJENATA");
         }
 
-        return response()->json($pacijenti);
+        return KorisnikResource::collection($pacijenti);
     }
 }

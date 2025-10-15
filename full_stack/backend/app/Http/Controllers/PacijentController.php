@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\ZdravstveniKarton;
+use App\Http\Resources\ZKartonResource;
 
 class PacijentController extends Controller
 {
@@ -22,6 +21,6 @@ class PacijentController extends Controller
             return response()->json("NEMA KARTONA ZA TRAŽENOG PACIJENTA");
         }
 
-        return response()->json($z_karton);
+        return ZKartonResource::collection($z_karton);
     }
 }

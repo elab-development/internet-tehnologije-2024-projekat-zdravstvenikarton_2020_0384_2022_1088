@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\KorisnikResource;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Pregled;
@@ -29,7 +30,7 @@ class OsobljeController extends Controller
             return response()->json("NEMA PACIJENATA KOJI SU POVEZANI SA DATIM MED. OSOBLJEM");
         }
 
-        return response()->json($pacijenti);
+        return KorisnikResource::collection($pacijenti);
     }
 
     // Funkcija koja vraća sve pacijente koji su u redu čekanja na pregled
@@ -44,7 +45,7 @@ class OsobljeController extends Controller
             return response()->json("NEMA PACIJENATA U RED ČEKANJA");
         }
 
-        return response()->json($pacijenti);
+        return KorisnikResource::collection($pacijenti);
     }
 
     // Funkcija koja kreira zdravstveni karton za pacijenta

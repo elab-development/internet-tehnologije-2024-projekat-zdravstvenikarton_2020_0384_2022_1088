@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\KorisnikResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
@@ -59,10 +60,12 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['USPEŠNA REGISTRACIJA', 
-        'podaci' => $user, 
-        'access_token' => $token, 
-        'token_type' => 'Bearer',]);
+        return response()->json([
+            'USPEŠNA REGISTRACIJA',
+            'podaci' => $user,
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+        ]);
     }
     // Funkcija za odjavu sa sistema
     public function logout(Request $request)
@@ -79,6 +82,6 @@ class AuthController extends Controller
     public function myAccount()
     {
         $user = Auth::user();
-        return response()->json(['poruka' => "PRIJAVLJENI KORISNIK", 'korisnik' => $user]);
+        return response()->json(['poruka' => "PRIJAVLJENI KORISNIK", 'korisnik' => new KorisnikResource($user)]);
     }
 }
