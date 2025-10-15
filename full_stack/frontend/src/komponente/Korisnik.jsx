@@ -1,5 +1,5 @@
 
-export default function Korisnik({korisnik, mojiP}) {
+export default function Korisnik({korisnik}) {
   return (
     <div className= "kartica">
      <div> <label> JMBG: </label>  <label>{korisnik.jmbg} </label> </div>

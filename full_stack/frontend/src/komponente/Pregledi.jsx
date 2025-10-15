@@ -1,18 +1,19 @@
-import React from 'react'
 import Pregled from './Pregled';
+import { useEffect } from 'react';
 
-function Pregledi({prijavljen, prikazPregleda, pregledi}) {
+function Pregledi({ prikazPregleda, pregledi }) {
 
-  prikazPregleda();
-  let preglediZaPrikaz = pregledi;
+  useEffect(() => {
+    prikazPregleda();
+  }, []);
 
   return (
     <>
-      <h3 style={{marginBottom:"50"+"px",marginTop:"50"+"px"}}> VAŠI PREGLEDI </h3>
+      <h3 style={{ marginBottom: "50" + "px", marginTop: "50" + "px" }}> VAŠI PREGLEDI </h3>
       <div className='kontejner'>
         {
-          preglediZaPrikaz.map(p => {
-            return <Pregled key={p.id} pregled={p}/>
+          pregledi.map(p => {
+            return <Pregled key={p.id} pregled={p} />
           })
         }
       </div>

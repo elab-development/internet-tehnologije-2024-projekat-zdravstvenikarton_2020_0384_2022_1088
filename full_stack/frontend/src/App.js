@@ -13,7 +13,10 @@ import {
   prijavaObrada,
   odjavaObrada,
   registracijaObrada,
-  prikazPregledaObrada
+  prikazPregledaObrada,
+  prikazPacijenataObrada,
+  prikazRedaObrada,
+  prikazKartonaObrada,
 } from "./obrada";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +24,8 @@ import {
 function App() {
   const [pregledi, setPregledi] = useState([]);
   const [pacijenti, setPacijenti] = useState([]);
-  const [kartoni, setKartoni] = useState([]);
+  const [redCekanja, setRedCekanja] = useState([]);
+  const [karton, setKarton] = useState([]);
 
   const navigate = useNavigate();
   const lokacija = useLocation();
@@ -49,6 +53,18 @@ function App() {
     prikazPregledaObrada(prijavljenKorisnik, setPregledi);
   }
 
+  function prikazPacijenata() {
+    prikazPacijenataObrada(prijavljenKorisnik, setPacijenti);
+  }
+
+  function prikazReda() {
+    prikazRedaObrada(setRedCekanja);
+  }
+
+  function prikazKartona() {
+    prikazKartonaObrada(prijavljenKorisnik,setKarton);
+  }
+
   /////////////////////////////////////////////////////////////
   /* Prikaz NavMeni-a osim na početnoj */
   let meni = null;
@@ -61,19 +77,12 @@ function App() {
       {meni}
 
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Prijava prijava={prijava} prijavljen={prijavljenKorisnik} />
-          }
-        />
+        <Route path="/" element={<Prijava prijava={prijava} prijavljen={prijavljenKorisnik} />} />
 
         <Route
           path="/registracija"
           element={
-            prijavljenKorisnik === null ? (
-              <Registracija registracija={registracija} />
-            ) : null
+            prijavljenKorisnik === null ? <Registracija registracija={registracija} /> : null
           }
         />
 
@@ -81,11 +90,7 @@ function App() {
           path="/pregledi"
           element={
             prijavljenKorisnik !== null ? (
-              <Pregledi
-                prijavljen={prijavljenKorisnik}
-                prikazPregleda={prikazPregleda}
-                pregledi={pregledi}
-              />
+              <Pregledi prikazPregleda={prikazPregleda} pregledi={pregledi} />
             ) : (
               <Prijava prijava={prijava} />
             )
@@ -96,11 +101,7 @@ function App() {
           path="/pacijenti"
           element={
             prijavljenKorisnik !== null ? (
-              <Korisnici
-                pacijenti={pacijenti}
-                prijavljen={prijavljenKorisnik}
-                uloga={prijavljenKorisnik.uloga}
-              />
+              <Korisnici prikazPacijenata={prikazPacijenata} pacijenti={pacijenti} />
             ) : (
               <Prijava prijava={prijava} />
             )
@@ -108,13 +109,12 @@ function App() {
         />
 
         <Route
-          path="/kartoni"
+          path="/karton"
           element={
             prijavljenKorisnik !== null ? (
               <Kartoni
-                kartoni={kartoni}
-                prijavljen={prijavljenKorisnik}
-                uloga={prijavljenKorisnik.uloga}
+                karton={karton}
+                prikazKartona={prikazKartona}
               />
             ) : (
               <Prijava prijava={prijava} />
@@ -126,7 +126,7 @@ function App() {
           path="/moji-podaci"
           element={
             prijavljenKorisnik !== null ? (
-              <Korisnici prijavljen={prijavljenKorisnik} mojiP={1} />
+              <Korisnici prijavljen={prijavljenKorisnik} />
             ) : (
               <Prijava prijava={prijava} />
             )
@@ -135,13 +135,7 @@ function App() {
 
         <Route
           path="/red-cekanja"
-          element={
-            prijavljenKorisnik !== null ? (
-              <RedCekanja />
-            ) : (
-              <Prijava prijava={prijava} />
-            )
-          }
+          element={prijavljenKorisnik !== null ? <RedCekanja prikazReda={prikazReda} redCekanja={redCekanja} /> : <Prijava prijava={prijava} />}
         />
 
         <Route path="*" element={<h2>Stranica nije pronađena. (404)</h2>} />

@@ -1,8 +1,10 @@
+import { useEffect } from "react";
 import Pregled from "./Pregled";
 
-function RedCekanja({ pregledi }) {
-  let nizZaPrikaz = pregledi.filter((p) => p.status === "na čekanju");
-
+function RedCekanja({ prikazReda, redCekanja }) {
+  useEffect(() => {
+    prikazReda();
+  }, []);
   return (
     <>
       <h3 style={{ marginBottom: "50" + "px", marginTop: "50" + "px" }}>
@@ -10,7 +12,7 @@ function RedCekanja({ pregledi }) {
       </h3>
 
       <div className="kontejner">
-        {nizZaPrikaz.map((p) => {
+        {redCekanja.map((p) => {
           return <Pregled pregled={p} />;
         })}
       </div>

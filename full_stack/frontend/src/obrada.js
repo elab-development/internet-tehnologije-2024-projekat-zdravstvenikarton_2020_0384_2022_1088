@@ -76,15 +76,72 @@ export function registracijaObrada(e, navigate) {
 }
 
 export function prikazPregledaObrada(prijavljenKorisnik, setPregledi) {
-  axios.get(`http://127.0.0.1:8000/api/${prijavljenKorisnik.id}/pregledi`, {})
-  .then((res) => {
-    console.log(res.data);
-    console.log("Radi");
-    setPregledi(res.data);
-    //setPregledi(res.data);
-  })
-  .catch((err) => {
-    console.log(err);
-    console.log("Ne radi");
-  })
+  axios
+    .get(`http://127.0.0.1:8000/api/lekar/${prijavljenKorisnik.id}/pregledi`, {
+      headers: {
+        Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+      },
+    })
+    .then((res) => {
+      console.log("Radi: " + res.data);
+      setPregledi(res.data);
+    })
+    .catch((err) => {
+      console.log(prijavljenKorisnik.id);
+      console.log(err + "Ne radi");
+    });
+}
+
+export function prikazPacijenataObrada(prijavljenKorisnik, setPacijenti) {
+  axios
+    .get(`http://127.0.0.1:8000/api/lekar/${prijavljenKorisnik.id}/pacijenti`, {
+      headers: {
+        Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+      },
+    })
+    .then((res) => {
+      console.log("Radi: " + res.data);
+      setPacijenti(res.data);
+    })
+    .catch((err) => {
+      console.log(prijavljenKorisnik.id);
+      console.log(err + "Ne radi");
+    });
+}
+
+export function prikazRedaObrada(setPacijenti) {
+  axios
+    .get(`http://127.0.0.1:8000/api/med-osoblje/red-cekanja`, {
+      headers: {
+        Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+      },
+    })
+    .then((res) => {
+      console.log("Radi red čekanja: " + res.data);
+      setPacijenti(res.data);
+    })
+    .catch((err) => {
+      console.log(err + "Ne radi");
+    });
+}
+
+export function prikazKartonaObrada(prijavljenKorisnik, setPacijenti) {
+  axios
+    .get(`http://127.0.0.1:8000/api/pacijent/${prijavljenKorisnik.id}/z-karton`, {
+      headers: {
+        Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+      },
+    })
+    .then((res) => {
+      console.log("Radi karton: " + res.data);
+      // Ako backend vrati string – postavi prazan niz
+      if (typeof res.data === "string") {
+        setPacijenti([]);
+      } else {
+        setPacijenti(res.data);
+      }
+    })
+    .catch((err) => {
+      console.log(err + "Ne radi karton !");
+    });
 }
