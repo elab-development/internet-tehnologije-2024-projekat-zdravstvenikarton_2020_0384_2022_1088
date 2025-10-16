@@ -6,6 +6,7 @@ import Pregledi from "./komponente/Pregledi";
 import Kartoni from "./komponente/Kartoni";
 import RedCekanja from "./komponente/RedCekanja";
 import Registracija from "./komponente/Registracija";
+import MojiPodaci from "./komponente/MojiPodaci";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -126,7 +127,7 @@ function App() {
           path="/moji-podaci"
           element={
             prijavljenKorisnik !== null ? (
-              <Korisnici prijavljen={prijavljenKorisnik} />
+              <MojiPodaci prijavljen={prijavljenKorisnik} />
             ) : (
               <Prijava prijava={prijava} />
             )

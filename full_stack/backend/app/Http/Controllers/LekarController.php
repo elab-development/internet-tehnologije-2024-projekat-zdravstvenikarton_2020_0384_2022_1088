@@ -23,7 +23,7 @@ class LekarController extends Controller
             return response()->json("NEMA PREGLEDA ZA TRAŽENOG LEKARA");
         }
         return PregledResource::collection($pregledi);
-        }
+    }
 
     // Funkcija vraća sve pacijente za traženog lekara
     public function pacijenti($id)

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Pregled from "./Pregled";
+import Korisnik from "./Korisnik";
 
 function RedCekanja({ prikazReda, redCekanja }) {
   useEffect(() => {
@@ -12,8 +12,8 @@ function RedCekanja({ prikazReda, redCekanja }) {
       </h3>
 
       <div className="kontejner">
-        {redCekanja.map((p) => {
-          return <Pregled pregled={p} />;
+        {redCekanja.map((k) => {
+          return <Korisnik korisnik={k} />;
         })}
       </div>
     </>

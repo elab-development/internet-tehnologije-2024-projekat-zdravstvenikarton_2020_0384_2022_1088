@@ -24,6 +24,7 @@ class KorisnikResource extends JsonResource
             'ime' => $this->ime,
             'prezime' => $this->prezime,
             'pol' => $this->pol,
+            'lozinka' => $this->password,
         ];
     }
 }

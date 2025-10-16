@@ -13,6 +13,7 @@ export function prijavaObrada(e, setPrijavljenKorisnik, navigate) {
     .then((res) => {
       window.sessionStorage.setItem("auth_token", res.data.access_token);
       setPrijavljenKorisnik(res.data.user);
+      console.log(res.data.user);
       navigate("/pregledi");
     })
     .catch((err) => {
@@ -83,8 +84,8 @@ export function prikazPregledaObrada(prijavljenKorisnik, setPregledi) {
       },
     })
     .then((res) => {
-      console.log("Radi: " + res.data);
-      setPregledi(res.data);
+      console.log("Radi: ", res.data.data);
+      setPregledi(res.data.data);
     })
     .catch((err) => {
       console.log(prijavljenKorisnik.id);
@@ -100,8 +101,8 @@ export function prikazPacijenataObrada(prijavljenKorisnik, setPacijenti) {
       },
     })
     .then((res) => {
-      console.log("Radi: " + res.data);
-      setPacijenti(res.data);
+      console.log("Radi: " + res.data.data);
+      setPacijenti(res.data.data);
     })
     .catch((err) => {
       console.log(prijavljenKorisnik.id);
@@ -117,8 +118,8 @@ export function prikazRedaObrada(setPacijenti) {
       },
     })
     .then((res) => {
-      console.log("Radi red čekanja: " + res.data);
-      setPacijenti(res.data);
+      console.log("Radi red čekanja: ", res.data.data);
+      setPacijenti(res.data.data);
     })
     .catch((err) => {
       console.log(err + "Ne radi");
@@ -133,12 +134,12 @@ export function prikazKartonaObrada(prijavljenKorisnik, setPacijenti) {
       },
     })
     .then((res) => {
-      console.log("Radi karton: " + res.data);
+      console.log("Radi karton: " + res.data.data);
       // Ako backend vrati string – postavi prazan niz
       if (typeof res.data === "string") {
         setPacijenti([]);
       } else {
-        setPacijenti(res.data);
+        setPacijenti(res.data.data);
       }
     })
     .catch((err) => {

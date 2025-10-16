@@ -130,7 +130,7 @@ a:hover {
   display: flex;
   background-color: #C7F9CC;
   min-width: 340px;
-  max-width: auto;
+  max-width: 340px;
   flex-direction: column;
   padding: 10px;
   box-shadow: 0 12px 10px rgba(0, 0, 0, 0.35);
@@ -145,15 +145,15 @@ a:hover {
 }
 
 .kartica>div>label {
-  min-width: 150px;
+  min-width: auto;
 }
 
 .kartica>div>label:first-child {
-  text-align: right;
+  text-align: left;
 }
 
 .kartica>div>label:last-child {
-  text-align: left;
+  text-align: right;
 }
 
 span.licniPodaci {
