@@ -30,11 +30,12 @@ function App() {
 
   const navigate = useNavigate();
   const lokacija = useLocation();
-  const [prijavljenKorisnik, setPrijavljenKorisnik] = useState(null);
 
-  useEffect(() => {
-    const token = window.sessionStorage.getItem("auth_token");
-  }, []);
+  // kako bi ostao ulogovan i nakon osvežavanja stranice
+  const [prijavljenKorisnik, setPrijavljenKorisnik] = useState(() => {
+    const sacuvan = window.sessionStorage.getItem("prijavljen_korisnik");
+    return sacuvan != null ? JSON.parse(sacuvan) : null;
+  });
 
   /////////////////////////////////////////////////////////////
   //// "Mostovi" ka funkcijama iz obrada.js
@@ -63,7 +64,7 @@ function App() {
   }
 
   function prikazKartona() {
-    prikazKartonaObrada(prijavljenKorisnik,setKarton);
+    prikazKartonaObrada(prijavljenKorisnik, setKarton);
   }
 
   /////////////////////////////////////////////////////////////
@@ -113,10 +114,7 @@ function App() {
           path="/karton"
           element={
             prijavljenKorisnik !== null ? (
-              <Kartoni
-                karton={karton}
-                prikazKartona={prikazKartona}
-              />
+              <Kartoni karton={karton} prikazKartona={prikazKartona} />
             ) : (
               <Prijava prijava={prijava} />
             )
@@ -136,7 +134,13 @@ function App() {
 
         <Route
           path="/red-cekanja"
-          element={prijavljenKorisnik !== null ? <RedCekanja prikazReda={prikazReda} redCekanja={redCekanja} /> : <Prijava prijava={prijava} />}
+          element={
+            prijavljenKorisnik !== null ? (
+              <RedCekanja prikazReda={prikazReda} redCekanja={redCekanja} />
+            ) : (
+              <Prijava prijava={prijava} />
+            )
+          }
         />
 
         <Route path="*" element={<h2>Stranica nije pronađena. (404)</h2>} />

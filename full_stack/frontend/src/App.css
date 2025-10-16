@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
 
 body {
@@ -12,14 +11,18 @@ body {
 
 .navMeni {
   display: flex;
+  position: fixed;  /*Zalepljeno za vrh*/
+  top: 0;
+  left: 0;
+  width: 100%;
   background-color: #22577A;
-  height: 70px;
+  height: 80px;
   margin-top: 0px;
   gap: 10px;
   justify-content: center;
   align-items: center;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .navMeni>a {
@@ -33,10 +36,9 @@ body {
   border: none;
   font-size: 12pt;
   color: white;
-  margin-left: auto;
 }
 
-.navMeni>button:hover{
+.navMeni>button:hover {
   color: red;
 }
 
@@ -66,7 +68,7 @@ a:hover {
   width: 300px;
   height: auto;
   padding: 30px;
-  opacity:80%;
+  opacity: 80%;
 }
 
 .forma {
@@ -107,12 +109,14 @@ a:hover {
   width: 400px;
   height: auto;
 }
-.kontejnerForme>a{
+
+.kontejnerForme>a {
   text-decoration: none;
   color: white;
   margin-top: 15px;
 }
-.kontejnerForme>a:hover{
+
+.kontejnerForme>a:hover {
   color: black;
 }
 
@@ -158,5 +162,6 @@ a:hover {
 
 span.licniPodaci {
   color: #80ED99;
-  margin-left: 500px;
+  margin-left: 400px;
+  
 }

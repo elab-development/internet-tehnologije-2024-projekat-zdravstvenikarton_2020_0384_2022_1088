@@ -2,14 +2,14 @@ import Korisnik from "./Korisnik";
 import { useEffect } from "react";
 
 function Korisnici({ prikazPacijenata, pacijenti }) {
-  
+
   useEffect(() => {
     prikazPacijenata();
   }, []);
 
   return (
     <>
-      <h3 style={{ marginBottom: "50" + "px", marginTop: "50" + "px" }}>
+      <h3 style={{ marginBottom: "50px", marginTop: "100px" }}>
         VAŠI PACIJENTI
       </h3>
 

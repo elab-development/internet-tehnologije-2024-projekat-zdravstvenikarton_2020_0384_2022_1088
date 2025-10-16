@@ -3,7 +3,7 @@ import React from 'react'
 function Karton({ zk }) {
 
   // Ako zk nije niz ili je prazan
-  if (!Array.isArray(zk) || zk.length === 0) {
+  if (zk.length === 0) {
     return <p>Nema kartona za datog pacijenta!</p>;
   }
   else {

@@ -1,5 +1,8 @@
 import axios from "axios";
 
+// MORAĆE DA SE NAPRAVE RAZLIČITE FUNKCIJE ZA PRIKAZ PREGLEDA
+// PO SVAKOJ ULOZI
+
 export function prijavaObrada(e, setPrijavljenKorisnik, navigate) {
   e.preventDefault();
   const inpMejl = document.querySelector("#mejl").value;
@@ -12,13 +15,13 @@ export function prijavaObrada(e, setPrijavljenKorisnik, navigate) {
     })
     .then((res) => {
       window.sessionStorage.setItem("auth_token", res.data.access_token);
+      window.sessionStorage.setItem("prijavljen_korisnik", JSON.stringify(res.data.user));
       setPrijavljenKorisnik(res.data.user);
-      console.log(res.data.user);
+      console.log("OBRADA -> Uspešna prijava: ", res.data);
       navigate("/pregledi");
     })
     .catch((err) => {
-      console.log(err);
-      console.log("Nije uspelo :(");
+      console.log("OBRADA -> Greška prilikom prijave: ", err);
     });
 }
 
@@ -36,11 +39,12 @@ export function odjavaObrada(setPrijavljenKorisnik, navigate) {
     .then((res) => {
       setPrijavljenKorisnik(null);
       window.sessionStorage.removeItem("auth_token");
+      window.sessionStorage.removeItem("prijavljen_korisnik");
       navigate("/");
-      console.log(res.data);
+      console.log("OBRADA -> Uspešna odjava: ", res.data);
     })
     .catch((err) => {
-      console.error("Greška pri odjavi:", err);
+      console.log("OBRADA -> Greška prilikom odjave: ", err);
     });
 }
 
@@ -70,10 +74,12 @@ export function registracijaObrada(e, navigate) {
       pol,
     })
     .then((res) => {
-      console.log("Odgovor sa servera: ", res.data);
+      console.log("OBRADA -> Uspešna registracija: ", res.data);
       navigate("/");
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log("OBRADA -> Greška prilikom registracije: ", err);
+    });
 }
 
 export function prikazPregledaObrada(prijavljenKorisnik, setPregledi) {
@@ -84,12 +90,11 @@ export function prikazPregledaObrada(prijavljenKorisnik, setPregledi) {
       },
     })
     .then((res) => {
-      console.log("Radi: ", res.data.data);
       setPregledi(res.data.data);
+      console.log("OBRADA -> Uspešan prikaz pregleda: ", res.data);
     })
     .catch((err) => {
-      console.log(prijavljenKorisnik.id);
-      console.log(err + "Ne radi");
+      console.log("OBRADA -> Greška u prikazu pregleda: ", err);
     });
 }
 
@@ -101,12 +106,11 @@ export function prikazPacijenataObrada(prijavljenKorisnik, setPacijenti) {
       },
     })
     .then((res) => {
-      console.log("Radi: " + res.data.data);
       setPacijenti(res.data.data);
+      console.log("OBRADA -> Uspešan prikaz pacijenata: ", res.data);
     })
     .catch((err) => {
-      console.log(prijavljenKorisnik.id);
-      console.log(err + "Ne radi");
+      console.log("OBRADA -> Greška u prikazu pacijenata: ", err);
     });
 }
 
@@ -118,15 +122,15 @@ export function prikazRedaObrada(setPacijenti) {
       },
     })
     .then((res) => {
-      console.log("Radi red čekanja: ", res.data.data);
       setPacijenti(res.data.data);
+      console.log("OBRADA -> Uspešan prikaz reda čekanja: ", res.data);
     })
     .catch((err) => {
-      console.log(err + "Ne radi");
+      console.log("OBRADA -> Greška u prikazu reda čekanja: ", err);
     });
 }
 
-export function prikazKartonaObrada(prijavljenKorisnik, setPacijenti) {
+export function prikazKartonaObrada(prijavljenKorisnik, setKarton) {
   axios
     .get(`http://127.0.0.1:8000/api/pacijent/${prijavljenKorisnik.id}/z-karton`, {
       headers: {
@@ -134,15 +138,10 @@ export function prikazKartonaObrada(prijavljenKorisnik, setPacijenti) {
       },
     })
     .then((res) => {
-      console.log("Radi karton: " + res.data.data);
-      // Ako backend vrati string – postavi prazan niz
-      if (typeof res.data === "string") {
-        setPacijenti([]);
-      } else {
-        setPacijenti(res.data.data);
-      }
+      setKarton(res.data.data);
+      console.log("OBRADA -> Uspešan prikaz kartona: ", res.data);
     })
     .catch((err) => {
-      console.log(err + "Ne radi karton !");
+      console.log("OBRADA -> Greška u prikazu kartona: ", err);
     });
 }

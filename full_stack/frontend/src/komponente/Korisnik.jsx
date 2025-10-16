@@ -9,7 +9,7 @@ export default function Korisnik({korisnik}) {
       <div> <label> Pol: </label>  <label>{korisnik.pol} </label> </div>
       <div> <label> Mejl: </label>  <label>{korisnik.email} </label> </div>
       <div> <label> Uloga: </label>  <label>{korisnik.uloga} </label> </div>
-      <div> <label> Korisnicko ime: </label>  <label>{korisnik.username} </label> </div>
+      <div> <label> Korisničko ime: </label>  <label>{korisnik.username} </label> </div>
     </div>
   );
 }

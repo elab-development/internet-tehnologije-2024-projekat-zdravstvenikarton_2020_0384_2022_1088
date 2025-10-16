@@ -7,13 +7,13 @@ function RedCekanja({ prikazReda, redCekanja }) {
   }, []);
   return (
     <>
-      <h3 style={{ marginBottom: "50" + "px", marginTop: "50" + "px" }}>
+      <h3 style={{ marginBottom: "50px", marginTop: "100px" }}>
         RED ČEKANJA
       </h3>
 
       <div className="kontejner">
         {redCekanja.map((k) => {
-          return <Korisnik korisnik={k} />;
+          return <Korisnik korisnik={k} key={k.id} />;
         })}
       </div>
     </>

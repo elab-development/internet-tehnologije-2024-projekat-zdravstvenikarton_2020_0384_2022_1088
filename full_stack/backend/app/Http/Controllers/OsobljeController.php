@@ -26,9 +26,9 @@ class OsobljeController extends Controller
         $pacijentIds = $pregledi->pluck('pacijent_id')->unique();
         $pacijenti = User::whereIn('id', $pacijentIds)->get();
 
-        if ($pacijenti->isEmpty()) {
+       /* if ($pacijenti->isEmpty()) {
             return response()->json("NEMA PACIJENATA KOJI SU POVEZANI SA DATIM MED. OSOBLJEM");
-        }
+        }*/
 
         return KorisnikResource::collection($pacijenti);
     }
@@ -41,9 +41,9 @@ class OsobljeController extends Controller
         $pacijentIds = $pregledi->pluck('pacijent_id')->unique();
         $pacijenti = User::whereIn('id', $pacijentIds)->get();
 
-        if ($pacijenti->isEmpty()) {
+        /*if ($pacijenti->isEmpty()) {
             return response()->json("NEMA PACIJENATA U RED ČEKANJA");
-        }
+        }*/
 
         return KorisnikResource::collection($pacijenti);
     }

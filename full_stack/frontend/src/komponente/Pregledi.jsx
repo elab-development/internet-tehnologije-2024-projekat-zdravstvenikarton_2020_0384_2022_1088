@@ -9,7 +9,7 @@ function Pregledi({ prikazPregleda, pregledi }) {
 
   return (
     <>
-      <h3 style={{ marginBottom: "50" + "px", marginTop: "50" + "px" }}> VAŠI PREGLEDI </h3>
+      <h3 style={{ marginBottom: "50px", marginTop: "100px" }}> VAŠI PREGLEDI </h3>
       <div className='kontejner'>
         {
           pregledi.map(p => {

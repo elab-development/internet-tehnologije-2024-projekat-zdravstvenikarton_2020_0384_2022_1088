@@ -19,9 +19,9 @@ class LekarController extends Controller
             return response()->json("LEKAR NIJE PRONAĐEN", 404);
         }
         $pregledi = Pregled::where('lekar_id', $id)->get();
-        if ($pregledi->count() == 0) {
+        /*if ($pregledi->count() == 0) {
             return response()->json("NEMA PREGLEDA ZA TRAŽENOG LEKARA");
-        }
+        }*/
         return PregledResource::collection($pregledi);
     }
 
@@ -43,9 +43,9 @@ class LekarController extends Controller
         // Dohvati sve pacijente po tim ID-evima
         $pacijenti = User::whereIn('id', $pacijentIds)->get();
 
-        if ($pacijenti->isEmpty()) {
+       /* if ($pacijenti->isEmpty()) {
             return response()->json("LEKAR NEMA PREGLEDANIH PACIJENATA");
-        }
+        }*/
 
         return KorisnikResource::collection($pacijenti);
     }
