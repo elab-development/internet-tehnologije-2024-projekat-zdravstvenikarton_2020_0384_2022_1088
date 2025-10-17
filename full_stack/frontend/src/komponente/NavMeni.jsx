@@ -6,7 +6,7 @@ function NavMeni({ odjava, korisnik }) {
     return (
       <div className="navMeni">
 
-        <Link to="/pregledi"> Moji pregledi </Link>
+        <Link to="lekar/pregledi"> Moji pregledi </Link>
         <Link to="/pacijenti"> Moji pacijenti </Link>
         <Link to="/red-cekanja"> Red čekanja </Link>
         <Link to="/moji-podaci"> Moji podaci </Link>
@@ -29,7 +29,7 @@ function NavMeni({ odjava, korisnik }) {
   else if (korisnik.uloga === "pacijent") {
     return (
       <div className="navMeni">
-        <Link to="/pregledi"> Moji pregledi </Link>
+        <Link to="pacijent/pregledi"> Moji pregledi </Link>
         <Link to="/karton"> Moj karton </Link>
         <Link to="/moji-podaci"> Moji podaci </Link>
         <span className="licniPodaci">{korisnik.uloga}: {korisnik.ime} {korisnik.prezime}</span>

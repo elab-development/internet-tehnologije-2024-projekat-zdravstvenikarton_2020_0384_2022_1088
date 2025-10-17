@@ -82,7 +82,7 @@ export function registracijaObrada(e, navigate) {
     });
 }
 
-export function prikazPregledaObrada(prijavljenKorisnik, setPregledi) {
+export function prikazPregledaObradaL(prijavljenKorisnik, setPregledi) {
   axios
     .get(`http://127.0.0.1:8000/api/lekar/${prijavljenKorisnik.id}/pregledi`, {
       headers: {
@@ -91,10 +91,26 @@ export function prikazPregledaObrada(prijavljenKorisnik, setPregledi) {
     })
     .then((res) => {
       setPregledi(res.data.data);
-      console.log("OBRADA -> Uspešan prikaz pregleda: ", res.data);
+      console.log("OBRADA -> Uspešan prikaz pregleda lekara: ", res.data);
     })
     .catch((err) => {
-      console.log("OBRADA -> Greška u prikazu pregleda: ", err);
+      console.log("OBRADA -> Greška u prikazu pregleda lekara: ", err);
+    });
+}
+
+export function prikazPregledaObradaP(prijavljenKorisnik, setPregledi) {
+  axios
+    .get(`http://127.0.0.1:8000/api/pacijent/${prijavljenKorisnik.id}/pregledi`, {
+      headers: {
+        Authorization: "Bearer " + window.sessionStorage.getItem("auth_token"),
+      },
+    })
+    .then((res) => {
+      setPregledi(res.data.data);
+      console.log("OBRADA -> Uspešan prikaz pregleda pacijenta: ", res.data);
+    })
+    .catch((err) => {
+      console.log("OBRADA -> Greška u prikazu pregleda pacijenta: ", err);
     });
 }
 

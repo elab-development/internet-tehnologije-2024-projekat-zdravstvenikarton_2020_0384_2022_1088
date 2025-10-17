@@ -14,7 +14,8 @@ import {
   prijavaObrada,
   odjavaObrada,
   registracijaObrada,
-  prikazPregledaObrada,
+  prikazPregledaObradaL,
+  prikazPregledaObradaP,
   prikazPacijenataObrada,
   prikazRedaObrada,
   prikazKartonaObrada,
@@ -23,19 +24,20 @@ import {
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 function App() {
-  const [pregledi, setPregledi] = useState([]);
-  const [pacijenti, setPacijenti] = useState([]);
-  const [redCekanja, setRedCekanja] = useState([]);
-  const [karton, setKarton] = useState([]);
-
-  const navigate = useNavigate();
-  const lokacija = useLocation();
-
   // kako bi ostao ulogovan i nakon osvežavanja stranice
   const [prijavljenKorisnik, setPrijavljenKorisnik] = useState(() => {
     const sacuvan = window.sessionStorage.getItem("prijavljen_korisnik");
     return sacuvan != null ? JSON.parse(sacuvan) : null;
   });
+
+  const [pregledi, setPregledi] = useState([]);
+  const [pacijenti, setPacijenti] = useState([]);
+  const [redCekanja, setRedCekanja] = useState([]);
+  const [karton, setKarton] = useState([]);
+  /*const [uloga, setUloga] = useState(prijavljenKorisnik.uloga);*/
+
+  const navigate = useNavigate();
+  const lokacija = useLocation();
 
   /////////////////////////////////////////////////////////////
   //// "Mostovi" ka funkcijama iz obrada.js
@@ -51,8 +53,12 @@ function App() {
     registracijaObrada(e, navigate);
   }
 
-  function prikazPregleda() {
-    prikazPregledaObrada(prijavljenKorisnik, setPregledi);
+  function prikazPregledaL() {
+    prikazPregledaObradaL(prijavljenKorisnik, setPregledi);
+  }
+
+  function prikazPregledaP() {
+    prikazPregledaObradaP(prijavljenKorisnik, setPregledi);
   }
 
   function prikazPacijenata() {
@@ -89,10 +95,21 @@ function App() {
         />
 
         <Route
-          path="/pregledi"
+          path="lekar/pregledi"
           element={
             prijavljenKorisnik !== null ? (
-              <Pregledi prikazPregleda={prikazPregleda} pregledi={pregledi} />
+              <Pregledi prikazPregleda={prikazPregledaL} pregledi={pregledi} />
+            ) : (
+              <Prijava prijava={prijava} />
+            )
+          }
+        />
+
+        <Route
+          path="pacijent/pregledi"
+          element={
+            prijavljenKorisnik !== null ? (
+              <Pregledi prikazPregleda={prikazPregledaP} pregledi={pregledi} />
             ) : (
               <Prijava prijava={prijava} />
             )
