@@ -17,11 +17,22 @@ export function prijavaObrada(e, setPrijavljenKorisnik, navigate) {
       window.sessionStorage.setItem("auth_token", res.data.access_token);
       window.sessionStorage.setItem("prijavljen_korisnik", JSON.stringify(res.data.user));
       setPrijavljenKorisnik(res.data.user);
+      if (res.data.user.uloga === "lekar") {
+        navigate("lekar/pregledi");
+      } else if (res.data.user.uloga === "pacijent") {
+        navigate("pacijent/pregledi");
+      } else if (res.data.user.uloga === "med_osoblje") {
+        navigate("/pregledi")
+      }
       console.log("OBRADA -> Uspešna prijava: ", res.data);
-      navigate("/pregledi");
     })
     .catch((err) => {
-      console.log("OBRADA -> Greška prilikom prijave: ", err);
+      // Prikaz poruke za neautorizovanog korisnika
+      if (err.response && err.response.status === 401) {
+        alert(err.response.data.message); // "Neautorizovan"
+      } else {
+        console.log("OBRADA -> Greška prilikom prijave: ", err);
+      }
     });
 }
 
@@ -74,11 +85,17 @@ export function registracijaObrada(e, navigate) {
       pol,
     })
     .then((res) => {
-      console.log("OBRADA -> Uspešna registracija: ", res.data);
+      console.log("OBRADA -> Uspešna registracija: ", res);
+      alert(res.data.message); // Prikazuje "Uspešna registracija !"
       navigate("/");
     })
     .catch((err) => {
-      console.log("OBRADA -> Greška prilikom registracije: ", err);
+      if (err.response) {
+        // Greška validatora ili drugi problemi
+        alert(err.response.data.message); // prikazuje grešku u delu message"
+      } else {
+        console.log("OBRADA -> Greška prilikom registracije: ", err);
+      }
     });
 }
 
@@ -155,7 +172,7 @@ export function prikazKartonaObrada(prijavljenKorisnik, setKarton) {
     })
     .then((res) => {
       setKarton(res.data.data);
-      console.log("OBRADA -> Uspešan prikaz kartona: ", res.data);
+      console.log("OBRADA -> Uspešan prikaz kartona: ", res.data.data);
     })
     .catch((err) => {
       console.log("OBRADA -> Greška u prikazu kartona: ", err);

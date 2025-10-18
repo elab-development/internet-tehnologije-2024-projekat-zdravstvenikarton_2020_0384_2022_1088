@@ -41,18 +41,6 @@ class DatabaseSeeder extends Seeder
         Pregled::factory()->count(20)->create();
         ZdravstveniKarton::factory()->count(10)->create();
 
-        // Pacijent
-        User::create([
-            'username' => 'pacijent1',
-            'email' => 'pacijent1@example.com',
-            'password' => Hash::make('lozinka123'),
-            'uloga' => 'pacijent',
-            'jmbg' => '0101001000001',
-            'datum_rodjenja' => '2000-01-01',
-            'ime' => 'Marko',
-            'prezime' => 'Marković',
-            'pol' => 'muski',
-        ]);
 
         // Lekar
         User::create([
@@ -80,25 +68,87 @@ class DatabaseSeeder extends Seeder
             'pol' => 'zenski',
         ]);
 
+        // Pacijent1
+        User::create([
+            'username' => 'pacijent1',
+            'email' => 'pacijent1@example.com',
+            'password' => Hash::make('lozinka123'),
+            'uloga' => 'pacijent',
+            'jmbg' => '0101001000001',
+            'datum_rodjenja' => '2000-01-01',
+            'ime' => 'Marko',
+            'prezime' => 'Marković',
+            'pol' => 'muski',
+        ]);
 
-        // Dohvati korisnike po ulozi
-        $pacijent = User::where('uloga', 'pacijent')->first();
-        $lekar = User::where('uloga', 'lekar')->first();
-        $osoblje = User::where('uloga', 'med_osoblje')->first();
+        // Pacijent 2
+        User::create([
+            'username' => 'pacijent2',
+            'email' => 'pacijent2@example.com',
+            'password' => Hash::make('lozinka123'),
+            'uloga' => 'pacijent',
+            'jmbg' => '0202002000002',
+            'datum_rodjenja' => '1998-02-15',
+            'ime' => 'Jovan',
+            'prezime' => 'Jovanović',
+            'pol' => 'muski',
+        ]);
 
-        // Kreiraj 10 pregleda
-        for ($i = 1; $i <= 10; $i++) {
-            Pregled::create([
-                'dijagnoza' => "Dijagnoza $i",
-                'terapija' => "Terapija $i",
-                'vreme_zavrsetka' => now()->addDays($i),
-                'status' => $i % 2 == 0 ? 'zavrsen' : 'na_cekanju',
-                'lekar_id' => $lekar->id,
-                'med_osoblje_id' => $osoblje->id,
-                'pacijent_id' => $pacijent->id,
-            ]);
+        // Pacijent 3
+        User::create([
+            'username' => 'pacijent3',
+            'email' => 'pacijent3@example.com',
+            'password' => Hash::make('lozinka123'),
+            'uloga' => 'pacijent',
+            'jmbg' => '0303003000003',
+            'datum_rodjenja' => '1995-05-20',
+            'ime' => 'Milica',
+            'prezime' => 'Petrović',
+            'pol' => 'zenski',
+        ]);
+
+        // Pacijent 4
+        User::create([
+            'username' => 'pacijent4',
+            'email' => 'pacijent4@example.com',
+            'password' => Hash::make('lozinka123'),
+            'uloga' => 'pacijent',
+            'jmbg' => '0404004000004',
+            'datum_rodjenja' => '2001-09-10',
+            'ime' => 'Nikola',
+            'prezime' => 'Ilić',
+            'pol' => 'muski',
+        ]);
+
+
+        // Dozvoljeni ID-evi pacijenata
+        $pacijenti = [33, 34, 35, 36];
+
+        // Za svakog pacijenta napravi po 3 pregleda
+        foreach ($pacijenti as $pacijentId) {
+            for ($i = 1; $i <= 3; $i++) {
+                Pregled::create([
+                    'dijagnoza' => "Dijagnoza $pacijentId-$i",
+                    'terapija' => "Terapija $pacijentId-$i",
+                    'vreme_zavrsetka' => now()->addDays($i),
+                    'status' => $i % 2 == 0 ? 'zavrsen' : 'na_cekanju',
+                    'lekar_id' => 31,
+                    'med_osoblje_id' => 32,
+                    'pacijent_id' => $pacijentId,
+                ]);
+            }
         }
 
-       
+        // Za svakog pacijenta napravi po jedan zdravstveni karton
+        foreach ($pacijenti as $pacijentId) {
+            ZdravstveniKarton::create([
+                'status' => 'aktivan',
+                'poslednja_dijagnoza' => "Dijagnoza $pacijentId",
+                'poslednja_terapija' => "Terapija $pacijentId",
+                'lekar_id' => 31,
+                'med_osoblje_id' => 32,
+                'pacijent_id' => $pacijentId,
+            ]);
+        }
     }
 }

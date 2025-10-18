@@ -64,8 +64,12 @@ a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgba(87, 204, 153, 0.5);
-  width: 300px;
+  background-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 3px 0px 15px rgba(255,255,255,0.3);
+  border-style: solid ;
+  border-color: gray;
+  border-width: 0.3px;
+  min-width: 350px;
   height: auto;
   padding: 30px;
   opacity: 80%;
@@ -117,7 +121,10 @@ a:hover {
 }
 
 .kontejnerForme>a:hover {
-  color: black;
+  color: #80ED99;
+}
+.kontejnerForme>h3,p,label,div{
+  color: white;
 }
 
 /*////////////////////////////////////////////////////////////////////////////////////////////*/
@@ -140,7 +147,7 @@ a:hover {
   box-shadow: 0 12px 10px rgba(0, 0, 0, 0.35);
   gap: 10px;
   border: 1px solid #57CC99;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .kartica>div {
@@ -150,6 +157,7 @@ a:hover {
 
 .kartica>div>label {
   min-width: auto;
+  color: black;
 }
 
 .kartica>div>label:first-child {

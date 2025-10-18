@@ -17,7 +17,7 @@ function Korisnici({ prikazPacijenata, pacijenti }) {
         {
 
           pacijenti.map((p) => {
-            return <Korisnik korisnik={p} />
+            return <Korisnik korisnik={p} key={p.id} />
           })
         }
       </div>

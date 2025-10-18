@@ -18,7 +18,7 @@ export default function Prijava({ prijava }) {
             <br></br>
           <button type="submit" >Prijavite se</button>
         </form>
-        <Link to="/registracija">Nemate nalog ?, registrujte se ovde.</Link>
+        <Link to="/registracija">Registrujte se </Link>
 
       </div>
     </div>

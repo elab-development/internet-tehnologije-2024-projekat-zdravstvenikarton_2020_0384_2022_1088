@@ -14,7 +14,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if (!Auth::attempt($request->only('email', 'password'))) {
-            return response()->json(['message' => 'Neautorizovan'], 401);
+            return response()->json(['message' => 'Kredencijali nisu ispravni !'], 401);
         }
 
         $user = User::where('email', $request->email)->firstOrFail();
@@ -23,7 +23,7 @@ class AuthController extends Controller
         $user->tokens()->delete();
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['message' => 'USPEŠNO LOGOVANJE', 'user' => new KorisnikResource($user), 'access_token' => $token, 'token_type' => 'Bearer']);
+        return response()->json(['message' => 'Uspešna prijava !', 'user' => new KorisnikResource($user), 'access_token' => $token, 'token_type' => 'Bearer']);
     }
 
     // Funkcija za registraciju na sistem
@@ -42,9 +42,9 @@ class AuthController extends Controller
             'pol' => 'required|string|in:muski,zenski'
         ]);
 
-
+        // ako ne prođe validator u registraciji
         if ($validator->fails())
-            return response()->json([$validator->errors(), "GRESKA U VALIDATORU"]);
+            return response()->json(['error'=>$validator->errors(), 'message'=>"Neki podaci nisu validni !"],422);
 
         $user = User::create([
             'username' => $request->username,
@@ -61,7 +61,7 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
-            'USPEŠNA REGISTRACIJA',
+           'message'=> 'Uspešna registracija !',
             'podaci' => $user,
             'access_token' => $token,
             'token_type' => 'Bearer',

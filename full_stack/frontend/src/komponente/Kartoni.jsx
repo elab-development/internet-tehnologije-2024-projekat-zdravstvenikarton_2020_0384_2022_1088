@@ -9,7 +9,7 @@ const Kartoni = ({ karton, prikazKartona }) => {
   return (
     <>
       <h3 style={{ marginBottom: "50px", marginTop: "100px" }}>
-        VAŠI KARTONI
+        VAŠ KARTON  
       </h3>
       <div className="kontejner">
         <Karton zk={karton}  key={karton.id}/>
