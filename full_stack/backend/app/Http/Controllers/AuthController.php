@@ -29,7 +29,6 @@ class AuthController extends Controller
     // Funkcija za registraciju na sistem
     public function register(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
             'username' => 'required|string|max:255|unique:users',
             'email' => 'required|string|max:255|email|unique:users',
@@ -45,7 +44,6 @@ class AuthController extends Controller
         // ako ne prođe validator u registraciji
         if ($validator->fails())
             return response()->json(['error'=>$validator->errors(), 'message'=>"Neki podaci nisu validni !"],422);
-
         $user = User::create([
             'username' => $request->username,
             'email' => $request->email,
@@ -59,7 +57,6 @@ class AuthController extends Controller
         ]);
 
         $token = $user->createToken('auth_token')->plainTextToken;
-
         return response()->json([
            'message'=> 'Uspešna registracija !',
             'podaci' => $user,

@@ -11,7 +11,8 @@ body {
 
 .navMeni {
   display: flex;
-  position: fixed;  /*Zalepljeno za vrh*/
+  position: fixed;
+  /*Zalepljeno za vrh*/
   top: 0;
   left: 0;
   width: 100%;
@@ -43,11 +44,11 @@ body {
 }
 
 a:hover {
-  color: black;
+  color: #80ED99;
 }
 
 /*////////////////////////////////////////////////////////////////////////////////////////////*/
-/* PRIJAVA */
+/* FORME */
 
 .telo {
   display: flex;
@@ -65,8 +66,8 @@ a:hover {
   flex-direction: column;
   align-items: center;
   background-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 3px 0px 15px rgba(255,255,255,0.3);
-  border-style: solid ;
+  box-shadow: 3px 0px 15px rgba(255, 255, 255, 0.3);
+  border-style: solid;
   border-color: gray;
   border-width: 0.3px;
   min-width: 350px;
@@ -123,7 +124,11 @@ a:hover {
 .kontejnerForme>a:hover {
   color: #80ED99;
 }
-.kontejnerForme>h3,p,label,div{
+
+.kontejnerForme>h3,
+p,
+label,
+div {
   color: white;
 }
 
@@ -135,6 +140,12 @@ a:hover {
   gap: 25px;
   margin-top: 25px;
   flex-wrap: wrap;
+}
+
+.naslov {
+  color: black;
+  margin-top: 120px;
+  margin-bottom: 40px;
 }
 
 .kartica {
@@ -171,5 +182,17 @@ a:hover {
 span.licniPodaci {
   color: #80ED99;
   margin-left: 400px;
-  
+
+}
+
+/*////////////////////////////////////////////////////////////////////////////////////////////*/
+/* PAGINACIJA DUGMIĆI  */
+.paginacija {
+  padding: 10px;
+  border: solid 1px black;
+  background-color: #38A3A5;
+  color: white;
+
+
+
 }

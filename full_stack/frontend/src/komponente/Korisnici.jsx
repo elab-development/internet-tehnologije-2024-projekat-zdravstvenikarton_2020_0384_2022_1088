@@ -9,7 +9,7 @@ function Korisnici({ prikazPacijenata, pacijenti }) {
 
   return (
     <>
-      <h3 style={{ marginBottom: "50px", marginTop: "100px" }}>
+      <h3 className="naslov">
         VAŠI PACIJENTI
       </h3>
 

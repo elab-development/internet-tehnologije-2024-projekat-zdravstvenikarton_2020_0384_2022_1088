@@ -3,7 +3,7 @@ import React from 'react'
 function MojiPodaci({ prijavljen }) {
   return (
     <>
-      <h3 style={{ marginBottom: "50px", marginTop: "100px" }}> VAŠI PODACI </h3>
+      <h3 className='naslov'> VAŠI PODACI </h3>
       <div className='kontejner'>
 
         <div className='kartica'>
