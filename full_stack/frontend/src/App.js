@@ -7,6 +7,7 @@ import Kartoni from "./komponente/Kartoni";
 import RedCekanja from "./komponente/RedCekanja";
 import Registracija from "./komponente/Registracija";
 import MojiPodaci from "./komponente/MojiPodaci";
+import IzmenaLozinke from "./komponente/IzmenaLozinke";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -19,7 +20,9 @@ import {
   prikazPacijenataObrada,
   prikazRedaObrada,
   prikazKartonaObrada,
+  izmenaLozinkeObrada,
 } from "./obrada";
+import PromenaLozinke from "./komponente/IzmenaLozinke";
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -41,6 +44,10 @@ function App() {
 
   /////////////////////////////////////////////////////////////
   //// "Mostovi" ka funkcijama iz obrada.js
+  function izmenaLozinke(e) {
+    izmenaLozinkeObrada(e);
+  }
+
   function prijava(e) {
     prijavaObrada(e, setPrijavljenKorisnik, navigate);
   }
@@ -85,12 +92,19 @@ function App() {
       {meni}
 
       <Routes>
-        <Route path="/" element={<Prijava prijava={prijava} prijavljen={prijavljenKorisnik} />} />
+        <Route
+          path="/"
+          element={
+            <Prijava prijava={prijava} prijavljen={prijavljenKorisnik} />
+          }
+        />
 
         <Route
           path="/registracija"
           element={
-            prijavljenKorisnik === null ? <Registracija registracija={registracija} /> : null
+            prijavljenKorisnik === null ? (
+              <Registracija registracija={registracija} />
+            ) : null
           }
         />
 
@@ -120,7 +134,10 @@ function App() {
           path="/pacijenti"
           element={
             prijavljenKorisnik !== null ? (
-              <Korisnici prikazPacijenata={prikazPacijenata} pacijenti={pacijenti} />
+              <Korisnici
+                prikazPacijenata={prikazPacijenata}
+                pacijenti={pacijenti}
+              />
             ) : (
               <Prijava prijava={prijava} />
             )
@@ -158,6 +175,11 @@ function App() {
               <Prijava prijava={prijava} />
             )
           }
+        />
+
+        <Route
+          path="/izmena-lozinke"
+          element={<IzmenaLozinke izmenaLozinke={izmenaLozinke} />}
         />
 
         <Route path="*" element={<h2>Stranica nije pronađena. (404)</h2>} />

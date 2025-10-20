@@ -42,5 +42,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 // RUTE ZA AUTENTIFIKACIJU
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+Route::post('izmena-lozinke', [AuthController::class, 'izmenaLozinke']);
 Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('my-account', [AuthController::class, 'myAccount'])->middleware('auth:sanctum');

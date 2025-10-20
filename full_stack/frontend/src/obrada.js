@@ -178,3 +178,21 @@ export function prikazKartonaObrada(prijavljenKorisnik, setKarton) {
       console.log("OBRADA -> Greška u prikazu kartona: ", err);
     });
 }
+
+export function izmenaLozinkeObrada(e) {
+  e.preventDefault();
+  const email = e.target.email.value;
+
+  axios
+    .post("http://127.0.0.1:8000/api/izmena-lozinke", {
+      email: email
+    })
+    .then((res) => {
+      alert(res.data.message);
+      console.log("OBRADA -> Uspesno promenjena lozinka: ", res.data.message);
+    })
+    .catch((err) => {
+      alert(err.response.data.message);
+      console.log("OBRADA -> Greška prilikom promene lozinke: ", err);
+    });
+}

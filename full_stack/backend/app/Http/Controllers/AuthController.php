@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+
+
 
 class AuthController extends Controller
 {
@@ -43,11 +48,11 @@ class AuthController extends Controller
 
         // ako ne prođe validator u registraciji
         if ($validator->fails())
-            return response()->json(['error'=>$validator->errors(), 'message'=>"Neki podaci nisu validni !"],422);
+            return response()->json(['error' => $validator->errors(), 'message' => "Neki podaci nisu validni !"], 422);
         $user = User::create([
             'username' => $request->username,
             'email' => $request->email,
-            'password' =>  $request->password,
+            'password' => $request->password,
             'uloga' => $request->uloga,
             'jmbg' => $request->jmbg,
             'datum_rodjenja' => $request->datum_rodjenja,
@@ -58,7 +63,7 @@ class AuthController extends Controller
 
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json([
-           'message'=> 'Uspešna registracija !',
+            'message' => 'Uspešna registracija !',
             'podaci' => $user,
             'access_token' => $token,
             'token_type' => 'Bearer',
@@ -79,6 +84,37 @@ class AuthController extends Controller
     public function myAccount()
     {
         $user = Auth::user();
-        return response()->json(['poruka' => "PRIJAVLJENI KORISNIK", 'korisnik' => new  KorisnikResource($user)]);
+        return response()->json(['poruka' => "PRIJAVLJENI KORISNIK", 'korisnik' => new KorisnikResource($user)]);
+    }
+
+    /****************************************************************************************** */
+    // Funkcija za izmenu lozinke ako je korisnik zaboravio istu
+    public function izmenaLozinke(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+
+        // Pronalazak korisnika po emailu
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'Korisnik sa tim emailom ne postoji.'], 404);
+        }
+
+        // Generiši novu lozinku (nasumično, npr. 8 karaktera)
+        $novaLozinka = Str::random(8);
+
+        // Sačuvaj novu (heširanu) lozinku u bazi
+        $user->password = Hash::make($novaLozinka);
+        $user->save();
+
+        // Pošalji email sa novom lozinkom
+        Mail::raw("TEHNOMEDIC: Vaša nova lozinka je: $novaLozinka", function ($message) use ($user) {
+            $message->to($user->email)
+                ->subject('Nova lozinka');
+        });
+
+        return response()->json(['message' => 'Nova lozinka je poslata na vašu email adresu.']);
     }
 }

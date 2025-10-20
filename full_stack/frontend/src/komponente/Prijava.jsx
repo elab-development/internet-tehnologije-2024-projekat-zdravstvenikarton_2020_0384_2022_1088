@@ -19,6 +19,7 @@ export default function Prijava({ prijava }) {
           <button type="submit" >Prijavite se</button>
         </form>
         <Link to="/registracija">Registrujte se </Link>
+        <Link to="/izmena-lozinke">Zaboravili ste lozinku?</Link>
 
       </div>
     </div>
